@@ -9,7 +9,7 @@ const ngoRouter = require('./routes/ngo');
 
 
 app.get('/',(req,res)=>{
-  res.send('Hello world')
+  res.send('Hello betaji')
 })
 // routes =>
 app.use('/ngo', ngoRouter);

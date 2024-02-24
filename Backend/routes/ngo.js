@@ -58,7 +58,7 @@ router.post('/Register',[
        
       const data={
         user:{
-            id:user.id
+            id:user.id 
         }
       }
       const { password, ...userWithoutPassword } = user.toObject();
@@ -71,6 +71,59 @@ res.json({ success, user: userWithoutPassword });
         res.status(500).json({error:error.message})
     }
     });
+
+
+    // Login 
+
+    router.post('/login', [    
+        // validating the name ,email and password.
+          body('email', 'Enter a valid Email').isEmail(),
+          body('pass', 'Password should not be blank').exists(),
+        ], async (req, res) => {
+        
+          // CHECKING FOR INFORMATION ENTERED BY THE USER
+          const errors = validationResult(req);
+          let success=false;
+          if (!errors.isEmpty()) {
+            return res.status(400).json({success, errors: errors.array() });
+          }
+         
+          try{
+               
+            //  destructuring of ther request
+            const {email,pass}=req.body;
+            let user=await Ngo.findOne({email})
+            if(!user){
+                return res.status(400).json({success,message:"Such user does not exists"});
+            }
+      
+         
+            const passCompare=await bcrypt.compare(pass,user.password);
+            if(!passCompare)
+            {
+      
+              res.status(400).json({success,error:"Please enter the correct credetials"});
+              
+            }
+            const data={
+              user:{
+                  id:user.id
+              }
+            }
+
+
+            const { password, ...userWithoutPassword } = user.toObject();
+
+            success = true;
+            const token = jwt.sign(data, JWT_SECRET);
+            res.json({ success, userWithoutPassword });
+      
+        }catch(error){
+            console.error("something went wrong")
+            res.status(500).json({error:error.message})
+          }
+      
+        })
 
     module.exports = router ;
 
