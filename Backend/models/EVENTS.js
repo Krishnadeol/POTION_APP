@@ -1,39 +1,38 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const NgoSchema = new Schema({
+const EventsSchema = new Schema({
     name: {
         type: String,
         required: true,
         minlength: 3
     },
+
     email: {
         type: String,
         required: true,
-        unique: true
     },
-    password: {
-        type: String,
-        required: true,
-        minlength: 5
-    },
+
     description: {
         type: String,
         minlength: 5
     },
-    isLogoSet: {
-        type: Boolean,
-        default: false
+
+    tag:{
+        type:String,
+        default:"Public Healp"
     },
-    logoImage: {
-        type: String,
-        default: ""
+    
+    optype:{
+     type:String,
+     defualt:null
     },
 
-    ratings: {
+    stipend: {
         type: Number,
-        default: null
+        default: 0
     },
+    
     
     date: {
         type: Date,
@@ -41,5 +40,5 @@ const NgoSchema = new Schema({
     }
 });
 
-const Ngo = mongoose.model('Ngo', NgoSchema);
-module.exports = Ngo;
+const Events = mongoose.model('Events', EventsSchema);
+module.exports = Events;
