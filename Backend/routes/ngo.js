@@ -54,24 +54,24 @@ router.post('/Register',[
         name: req.body.name,
         password: hash,
         email: req.body.email,
-      })
+      });
        
       const data={
         user:{
             id:user.id
         }
       }
-      success=true;
-      const token=jwt.sign(data,JWT_SECRET);
-      res.json({success,token})
-    
+      const { password, ...userWithoutPassword } = user.toObject();
+
+success = true;
+const token = jwt.sign(data, JWT_SECRET);
+res.json({ success, user: userWithoutPassword });
     } catch(error){
         console.error("something went wrong")
         res.status(500).json({error:error.message})
     }
     });
 
-    
     module.exports = router ;
 
     
