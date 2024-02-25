@@ -23,7 +23,7 @@ const EventsSchema = new Schema({
         default:"Public Healp"
     },
     
-    optype:{
+    opportunity:{
      type:String,
      defualt:null
     },
@@ -33,11 +33,20 @@ const EventsSchema = new Schema({
         default: 0
     },
     
-    
-    date: {
+    startDate:{
+       type:Date,
+       default:null,
+       required:true
+    },
+    endDate:{
+        type:Date,
+        default:null
+     
+    },
+    entry_date: {
         type: Date,
         default: Date.now
-    }
+    } 
 });
 
 const Events = mongoose.model('Events', EventsSchema);

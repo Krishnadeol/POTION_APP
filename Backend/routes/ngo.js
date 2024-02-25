@@ -8,8 +8,6 @@
 //                    rating them and writing revies about them  
 //                    appyling for work at ngo  the ngo
 //                                        
-//  
-
 
 const express = require('express');
 const router = express.Router();
@@ -19,6 +17,7 @@ const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const Ngo = require('../models/NGO');
+const Events=require('../models/EVENTS');
 var jwt = require('jsonwebtoken');
 //const fetchUser = require('../middleware/fetchUser');
 const JWT_SECRET=process.env.JWT_SECRET;
@@ -38,7 +37,7 @@ router.post('/Register',[
     // checking for non unique email.
     try{
     let user=await Ngo.findOne({email:req.body.email})
-    
+      
     if(user){
         return res.status(400).json({success,message:"this user already exists"});
     }
@@ -119,11 +118,72 @@ res.json({ success, user: userWithoutPassword });
             res.json({ success, userWithoutPassword });
       
         }catch(error){
-            console.error("something went wrong")
+            console.error(error.message);
             res.status(500).json({error:error.message})
           }
       
         })
+         
+
+        // get all events
+
+         // add an event
+
+         router.post('/addevent',  [    
+            // validating the name ,email and password.
+              body('email', 'Enter a valid Email').isEmail(),
+              body('startDate', 'Start Date should not be blank').exists(),
+              body('name','Name of the event not included').exists(),
+              body('description','Name of the event not included').isLength({ min: 5 }),          
+             ],async (req, res) => {
+            
+                const errors = validationResult(req);
+                let success=false;
+                if (!errors.isEmpty()) {
+                  return res.status(400).json({ success,errors: errors.array() });
+                }
+
+                try {
+                    let tag = req.body.tag ? req.body.tag : 'Social well-fare';
+                    
+                    let event=Events.create({
+                        name: req.body.name,
+                        email: req.body.email,
+                        description:req.body.description,
+                        tag:tag,
+                        opportunity:req.body.oppotunity,
+                        stippend:req.body.stipend,
+                        startDate:req.body. startDate,
+                        endDate:req.body.endDate
+                      });
+             
+                      // This structure is often used to format the response data when sending a response to the client. In this case, data contains information about the newly created event, specifically its id.
+                    const data={
+                      event:{
+                          id:event.id
+                      }
+                    }
+                    success = true;
+                    res.json({ success,data});
+                     
+
+                } catch (error) {
+                    console.error(error.message);
+            res.status(500).json({error:error.message})
+                }
+             
+         })
+            
+         // update an event
+         
+         // delete an event
+        
+         // find Users who applied for the an event 
+
+         // accept or reject the applied user.
+      
+         // rate users work and give remarks for users.
+         
 
     module.exports = router ;
 

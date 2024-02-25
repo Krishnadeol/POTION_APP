@@ -21,6 +21,7 @@ const NgoSchema = new Schema({
         type: String,
         minlength: 5
     },
+
     isLogoSet: {
         type: Boolean,
         default: false
