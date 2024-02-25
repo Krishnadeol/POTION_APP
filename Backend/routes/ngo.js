@@ -146,13 +146,13 @@ res.json({ success, user: userWithoutPassword });
                 try {
                     let tag = req.body.tag ? req.body.tag : 'Social well-fare';
                     
-                    let event=Events.create({
+                    let event=await Events.create({
                         name: req.body.name,
                         email: req.body.email,
                         description:req.body.description,
                         tag:tag,
                         opportunity:req.body.oppotunity,
-                        stippend:req.body.stipend,
+                        stipend:req.body.stipend,
                         startDate:req.body. startDate,
                         endDate:req.body.endDate
                       });
@@ -164,9 +164,8 @@ res.json({ success, user: userWithoutPassword });
                       }
                     }
                     success = true;
+                    console.log(event.id);
                     res.json({ success,data});
-                     
-
                 } catch (error) {
                     console.error(error.message);
             res.status(500).json({error:error.message})
@@ -176,8 +175,23 @@ res.json({ success, user: userWithoutPassword });
             
          // update an event
          
-         // delete an event
-        
+      // delete an event
+      
+      router.delete("/deleteevent/:_id", async (req, res) => {
+        try {
+            let id = req.params._id;
+            let del = await Events.findByIdAndDelete(id);
+            
+            if (!del) {
+                return res.status(404).json({ error: "Event not found" });
+            }
+    
+            res.json({ message: "Event deleted successfully", deletedEvent: del });
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    });
+    
          // find Users who applied for the an event 
 
          // accept or reject the applied user.
