@@ -110,7 +110,6 @@ res.json({ success, user: userWithoutPassword });
               }
             }
 
-
             const { password, ...userWithoutPassword } = user.toObject();
 
             success = true;
@@ -124,9 +123,20 @@ res.json({ success, user: userWithoutPassword });
       
         })
          
+        // get all events for a particular NGO Using query parameters
+        router.get('/getevents',async (req,res)=>{
+          try{
+          let email=req.query.email;
+          const data= await Events.find({email:email});
+          let success=true;
+          res.json({success,data});
+          }catch(error){
+            res.json({error:error.message});
+          }
+        })
 
-        // get all events
-
+            
+        
          // add an event
 
          router.post('/addevent',  [    
@@ -175,6 +185,9 @@ res.json({ success, user: userWithoutPassword });
             
          // update an event
          
+
+
+
       // delete an event
       
       router.delete("/deleteevent/:_id", async (req, res) => {
