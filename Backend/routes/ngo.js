@@ -184,8 +184,20 @@ res.json({ success, user: userWithoutPassword });
          })
             
          // update an event
-         
-
+         router.patch("/updateevent", async (req, res) => {
+          const id = req.query.eid; // Get the id from query parameters
+          const updates = req.body; // Get the updates from request body
+      
+          //   updatedEvent will contain the document after it has been updated if { new: true } is set.
+         //    If { new: true } is not set, updatedEvent will contain the document as it was before the update operation.
+          try {
+              const response = await Events.findByIdAndUpdate(id, updates, { new: true });
+              let success=true;
+              res.status(200).json({success,response});
+          } catch (error) {
+              res.status(500).json({ error: error.message });
+          }
+      });
 
 
       // delete an event
@@ -205,8 +217,8 @@ res.json({ success, user: userWithoutPassword });
         }
     });
     
-         // find Users who applied for the an event 
-
+         // find Users who applied for the an event  show applicants
+          
          // accept or reject the applied user.
       
          // rate users work and give remarks for users.
