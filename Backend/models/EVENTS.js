@@ -20,7 +20,7 @@ const EventsSchema = new Schema({
 
     tag:{
         type:String,
-        default:"Public Healp"
+        default:"Public Help"
     },
     
     opportunity:{
