@@ -217,13 +217,17 @@ res.json({ success, user: userWithoutPassword });
         }
     });
     
+        // uploading documents
+         
+        // proper validation using otp on email and phone
+
          // find Users who applied for the an event  show applicants
           
          // accept or reject the applied user.
-      
-         // rate users work and give remarks for users.
          
-
+         // rate users work and give remarks for users.
+           
+        
     module.exports = router ;
 
     
