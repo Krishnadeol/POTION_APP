@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
 const otpGenerator = require("otp-generator");
+
 const generateOTP = () => {
   const OTP = otpGenerator.generate(6, {
     upperCaseAlphabets: false,
@@ -15,7 +16,7 @@ async function sendEmail(email) {
       service: "gmail",
       auth: {
         user: "", // Gmail email address
-        pass: "", // Gmail App Password
+        pass: "", // Gmail App Password  2fa authentication ke bad banega
       },
     });
 
@@ -24,9 +25,8 @@ async function sendEmail(email) {
       from: "dps.krishnadeol.12a@gmail.com",
       to: email,
       subject: "Test Email",
-      text: `Your OTP is: ${otp}`,
+      text: `Your OTP is: ${otp}  (Expires within 15 minutes)`,
     };
-
     const info = await transporter.sendMail(mailOptions);
     console.log("Email sent successfully!");
     return otp;
