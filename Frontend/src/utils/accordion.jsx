@@ -1,23 +1,23 @@
-import { HiShieldCheck } from "react-icons/hi";
-import { MdCancel, MdAnalytics } from "react-icons/md";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 const data = [
   {
-    icon: <HiShieldCheck/>,
-    heading: "Best interest rates on the market",
+    icon: <FontAwesomeIcon icon="fa-solid fa-hand-holding-heart" />,
+    heading: "Facilitates food donations for the needy.",
     detail:
-      "Exercitation in fugiat est ut ad ea cupidatat ut in cupidatat occaecat ut occaecat consequat est minim minim esse tempor laborum consequat esse adipisicing eu reprehenderit enim.",
+      "Give hope with every click - donate food to the needy effortlessly.",
   },
   {
-    icon: <MdCancel />,
-    heading: "Prevent unstable prices",
+    icon: <FontAwesomeIcon icon="fa-solid fa-bowl-food" />,
+    heading: "Assists in finding affordable food options",
     detail:
-      "Exercitation in fugiat est ut ad ea cupidatat ut in cupidatat occaecat ut occaecat consequat est minim minim esse tempor laborum consequat esse adipisicing eu reprehenderit enim.",
+      "Discover affordable nourishment with ease, because everyone deserves access to good food.",
   },
   {
-    icon: <MdAnalytics />,
-    heading: "Best price on the market",
+    icon: <FontAwesomeIcon icon="fa-solid fa-graduation-cap" />,
+    heading: "Offer awareness on reducing food waste.",
     detail:
-      "Exercitation in fugiat est ut ad ea cupidatat ut in cupidatat occaecat ut occaecat consequat est minim minim esse tempor laborum consequat esse adipisicing eu reprehenderit enim.",
+      "Learn to cherish every bite and reduce waste - together, we can make a difference.",
   },
 ];
 export default data;
