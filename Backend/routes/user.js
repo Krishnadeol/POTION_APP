@@ -7,6 +7,8 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const User = require("../models/USER");
 const Events = require("../models/EVENTS");
+const NGO = require("../models/NGO");
+const DonationLogs = require("../models/DonationLogs");
 var jwt = require("jsonwebtoken");
 const Applied = require("../models/UserApplied");
 //const fetchUser = require('../middleware/fetchUser');
@@ -125,7 +127,7 @@ router.post("/apply", async (req, res) => {
     let success = false;
     // checking if the user has already applied for the event .
 
-    const check = await Applied.find({ Eid: body.req.eid });
+    const check = await Applied.find({ Eid: req.body.eid });
 
     let event = await Applied.create({
       name: req.body.name,
@@ -168,5 +170,22 @@ router.get("/findmyevents", async (req, res) => {
 });
 
 // donation
+
+router.post("/donate", async (req, res) => {
+	try {
+		const targetNGO = await NGO.find({ email: req.body.ngoEmail });
+		targetNGO.funds += req.body.donationAmount;
+		await DonationLogs.create({
+			fromUser: req.body.email,
+			toNgo: targetNGO.email,
+			amout: req.body.donationAmount
+		});
+
+		res.json({success: true});
+	}
+	catch (err) {
+		res.status(400).json({ error: err.message });
+	}
+});
 
 module.exports = router;
