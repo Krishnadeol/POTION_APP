@@ -1,0 +1,44 @@
+[
+  {
+    "name": "No Hungry Child",
+    "amount": "1,88,450",
+    "detail": "This program is focused towards distributing nutritious & fresh food to poor, needy & hungry children in India.",
+    "image": "./MissionNoChildHungry.png"
+  },
+  {
+    "name": "Annapurnaa",
+    "amount": "99,353",
+    "detail": "Helps distribute food to old age homes and supports the elderly.",
+    "image": "./oldFood.png"
+  },
+  {
+    "name": "Mid Day Meal",
+    "amount": "3,96,852",
+    "detail": "MDMS is a school meal program that provides free lunch to children in local schools.",
+    "image": "./middaymeal.png"
+  },
+  {
+    "name": "Mitti Cafe",
+    "amount": "87,075",
+    "detail": "NGO for disabled people that empowers people to join together in fight against malnutrition.",
+    "image": "./DisabledEating.png"
+  },
+  {
+    "name": "Akshaya Patra Kitchen",
+    "amount": "2,92,000",
+    "detail": "Program to provide affordable meals for everyone by building public kitchens.",
+    "image": "./AkshayaPatra.png"
+  },
+  {
+    "name": "PM-Poshan",
+    "amount": "5,32,851",
+    "detail": "Centrally Sponsored Scheme that provides a hot cooked meal to children.",
+    "image": "./PMPOSHAN.png"
+  },
+  {
+    "name": "Annadan",
+    "amount": "1,02,852",
+    "detail": "Program for children and underprivileged people in India.",
+    "image": "./Iskcon.png"
+  }
+]
