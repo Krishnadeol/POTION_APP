@@ -34,5 +34,11 @@
     "amount": "5,32,851",
     "detail": "Centrally Sponsored Scheme that provides a hot cooked meal to children.",
     "image": "./PMPOSHAN.png"
+  },
+  {
+    "name": "Annadan",
+    "amount": "1,02,852",
+    "detail": "Program for children and underprivileged people in India.",
+    "image": "./Iskcon.png"
   }
 ]
