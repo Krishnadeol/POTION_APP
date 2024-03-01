@@ -178,7 +178,7 @@ router.post("/donate", async (req, res) => {
 		await DonationLogs.create({
 			fromUser: req.body.email,
 			toNgo: targetNGO.email,
-			amout: req.body.donationAmount
+			amount: req.body.donationAmount
 		});
 
 		res.json({success: true});
