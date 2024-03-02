@@ -7,16 +7,19 @@ const UserSchema = new Schema({
     required: true,
     minlength: 3,
   },
+
   email: {
     type: String,
     required: true,
     unique: true,
   },
+
   password: {
     type: String,
     required: true,
     minlength: 5,
   },
+
   description: {
     type: String,
     minlength: 5,
@@ -26,6 +29,7 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false,
   },
+
   ProfileImage: {
     type: String,
     default: "",
@@ -36,6 +40,10 @@ const UserSchema = new Schema({
     default: null,
   },
 
+  category: {
+    type: String,
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,

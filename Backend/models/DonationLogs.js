@@ -1,27 +1,27 @@
-const mogoose = reuire('mogoose');
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const DonationLogSchema = new Schema ({
-	fromUser: {
-		type: String,
-		required: true
-	},
+const DonationLogSchema = new Schema({
+  fromUser: {
+    type: String,
+    required: true,
+  },
 
-	toNgo: {
-		type: String,
-		required: true,
-	},
+  toNgo: {
+    type: String,
+    required: true,
+  },
 
-	amount: {
-		type: Number,
-		required: true
-	},
+  amount: {
+    type: Number,
+    required: true,
+  },
 
-	date: {
-		type: Date,
-		default: Date.now
-	}
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-const DonationLog = mongoose.model('DonationLog', DonationLogSchema);
+const DonationLog = mongoose.model("DonationLog", DonationLogSchema);
 module.exports = DonationLog;

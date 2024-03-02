@@ -8,6 +8,7 @@ app.use(express.json());
 const ngoRouter = require("./routes/ngo");
 const mailRouter = require("./routes/otp");
 const userRouter = require("./routes/user");
+const shopRouter = require("./routes/shop");
 app.get("/", (req, res) => {
   res.send("Hello betaji");
 });
@@ -16,6 +17,7 @@ app.use("/ngo", ngoRouter);
 app.use("/otp", mailRouter);
 app.use("/user", userRouter);
 
+app.use("/shop", shopRouter);
 connectToMongo()
   .then(() => {
     const server = app.listen(process.env.PORT, () =>

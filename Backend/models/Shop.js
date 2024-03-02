@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const NgoSchema = new Schema({
-  name: {
+const ShopSchema = new Schema({
+  ownerName: {
     type: String,
     required: true,
     minlength: 3,
@@ -12,6 +12,7 @@ const NgoSchema = new Schema({
     required: true,
     unique: true,
   },
+
   password: {
     type: String,
     required: true,
@@ -42,12 +43,7 @@ const NgoSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-
-  funds: {
-    type: Number,
-    default: 0,
-  },
 });
 
-const Ngo = mongoose.model("Ngo", NgoSchema);
-module.exports = Ngo;
+const Shop = mongoose.model("Shop", ShopSchema);
+module.exports = Shop;

@@ -1,34 +1,17 @@
-// all the routes related to ngos will be here
-// registeration
-// login
-// api requests like
-//
-//                    viewing specific ngo
-//  user based
-//                    rating them and writing revies about them
-//                    appyling for work at ngo  the ngo
-//
-
 const express = require("express");
 const router = express.Router();
 require("dotenv").config();
 const { body, validationResult } = require("express-validator");
-// for encrypting the password we use bcrypt for salt generation.
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const Ngo = require("../models/NGO");
-const Events = require("../models/EVENTS");
-const Applied = require("../models/UserApplied");
+const User = require("../models/Shop");
+const Deal = require("../models/DEAL");
 var jwt = require("jsonwebtoken");
-const { find } = require("../models/UserApplied");
-//const fetchUser = require('../middleware/fetchUser');
 const JWT_SECRET = process.env.JWT_SECRET;
 
-//  Register
 router.post(
   "/Register",
   [
-    // validating the name ,email and password.
     body("name", "Enter a valid name").isLength({ min: 4 }),
     body("email", "Enter a valid Email").isEmail(),
     body("password", "Password must have at least 5 characters").isLength({
@@ -43,22 +26,19 @@ router.post(
     }
     // checking for non unique email.
     try {
-      let user = await Ngo.findOne({ email: req.body.email });
+      let user = await User.findOne({ email: req.body.email });
 
       if (user) {
         return res
           .status(400)
           .json({ success, message: "this user already exists" });
       }
-
       const myPass = req.body.password;
-
       // these are returning promises . Hence we should use await . here we encypting the password
       const salt = bcrypt.genSaltSync(saltRounds);
       const hash = bcrypt.hashSync(myPass, salt);
-
-      user = await Ngo.create({
-        name: req.body.name,
+      user = await User.create({
+        ownerName: req.body.name,
         password: hash,
         email: req.body.email,
       });
@@ -72,15 +52,13 @@ router.post(
 
       success = true;
       const token = jwt.sign(data, JWT_SECRET);
-      res.json({ success, user: userWithoutPassword });
+      res.json({ success, data });
     } catch (error) {
       console.error("something went wrong");
       res.status(500).json({ error: error.message });
     }
   }
 );
-
-// Login
 
 router.post(
   "/login",
@@ -100,7 +78,7 @@ router.post(
     try {
       //  destructuring of ther request
       const { email, pass } = req.body;
-      let user = await Ngo.findOne({ email });
+      let user = await User.findOne({ email });
       if (!user) {
         return res
           .status(400)
@@ -120,7 +98,7 @@ router.post(
       };
 
       const { password, ...userWithoutPassword } = user.toObject();
-
+      2;
       success = true;
       const token = jwt.sign(data, JWT_SECRET);
       res.json({ success, userWithoutPassword });
@@ -131,28 +109,19 @@ router.post(
   }
 );
 
-// get all events for a particular NGO Using query parameters
-router.get("/getevents", async (req, res) => {
-  try {
-    let email = req.query.email;
-    const data = await Events.find({ email: email });
-    let success = true;
-    res.json({ success, data });
-  } catch (error) {
-    res.json({ error: error.message });
-  }
-});
-
-// add an event
+module.exports = router;
+// add deal
 
 router.post(
-  "/addevent",
+  "/adddeal",
   [
-    // validating the name ,email and password.
-    body("email", "Enter a valid Email").isEmail(),
-    body("startDate", "Start Date should not be blank").exists(),
-    body("name", "Name of the event not included").exists(),
-    body("description", "Name of the event not included").isLength({ min: 5 }),
+    body("email", "Shop email not present").exists(),
+    body("date", "Expiery Date should not be blank").exists(),
+    body("name", "Name of the Item not included").exists(),
+    body("description", "Description of the event not included").isLength({
+      min: 5,
+    }),
+    body("quantity", "Quantity of the item not defined").exists(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -162,27 +131,31 @@ router.post(
     }
 
     try {
-      let tag = req.body.tag ? req.body.tag : "Social well-fare";
+      let success = false;
+      let user = await User.findOne({ email: req.body.email });
+      if (!user) {
+        return res
+          .status(400)
+          .json({ success, message: "Enter your own Email" });
+      }
 
-      let event = await Events.create({
-        name: req.body.name,
-        email: req.body.email,
+      let deal = await Deal.create({
+        itemName: req.body.name,
         description: req.body.description,
-        tag: tag,
-        opportunity: req.body.oppotunity,
-        stipend: req.body.stipend,
-        startDate: req.body.startDate,
-        endDate: req.body.endDate,
+        expDate: req.body.date,
+        price: req.body.price,
+        itemQuantity: req.body.quantity,
+        shopEmail: req.body.email,
       });
 
       // This structure is often used to format the response data when sending a response to the client. In this case, data contains information about the newly created event, specifically its id.
       const data = {
         event: {
-          id: event.id,
+          id: deal.id,
         },
       };
       success = true;
-      console.log(event.id);
+      console.log(deal.id);
       res.json({ success, data });
     } catch (error) {
       console.error(error.message);
@@ -192,14 +165,15 @@ router.post(
 );
 
 // update an event
-router.patch("/updateevent", async (req, res) => {
-  const id = req.query.eid; // Get the id from query parameters
+router.patch("/updatedeal", async (req, res) => {
+  // id of the deal
+  const id = req.query.id; // Get the id from query parameters
   const updates = req.body; // Get the updates from request body
 
   //   updatedEvent will contain the document after it has been updated if { new: true } is set.
   //    If { new: true } is not set, updatedEvent will contain the document as it was before the update operation.
   try {
-    const response = await Events.findByIdAndUpdate(id, updates, { new: true });
+    const response = await Deal.findByIdAndUpdate(id, updates, { new: true });
     let success = true;
     res.status(200).json({ success, response });
   } catch (error) {
@@ -207,15 +181,13 @@ router.patch("/updateevent", async (req, res) => {
   }
 });
 
-// delete an event
-
-router.delete("/deleteevent/:_id", async (req, res) => {
+// delete a deal
+router.delete("/deletedeal/:_id", async (req, res) => {
   try {
     let id = req.params._id;
-    let del = await Events.findByIdAndDelete(id);
-
+    let del = await Deal.findByIdAndDelete(id);
     if (!del) {
-      return res.status(404).json({ error: "Event not found" });
+      return res.status(404).json({ error: "Deal not found" });
     }
 
     res.json({ message: "Event deleted successfully", deletedEvent: del });
@@ -224,21 +196,22 @@ router.delete("/deleteevent/:_id", async (req, res) => {
   }
 });
 
-// uploading documents
-
-// find Users who applied for the an event  show applicants
-router.get("/findusers", async (req, res) => {
+// show all deals
+router.get("/getalldeals", async (req, res) => {
   try {
-    const data = await Applied.find({ Eid: req.body.eid });
-    let success = true;
-    res.json({ success, data });
+    let result = await Deal.find();
+    return res.status(200).json(result);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 });
 
-// accept or reject the applied user.
-
-// rate users work and give remarks for users.
-
-module.exports = router;
+// find deals  belonging to shop
+router.get("/getmydeals", async (req, res) => {
+  try {
+    let result = await Deal.find({ shopEmail: req.body.email });
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});

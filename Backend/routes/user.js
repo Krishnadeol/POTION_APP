@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 require("dotenv").config();
 const { body, validationResult } = require("express-validator");
-// for encrypting the password we use bcrypt for salt generation.
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const User = require("../models/USER");
@@ -11,7 +10,6 @@ const NGO = require("../models/NGO");
 const DonationLogs = require("../models/DonationLogs");
 var jwt = require("jsonwebtoken");
 const Applied = require("../models/UserApplied");
-//const fetchUser = require('../middleware/fetchUser');
 const JWT_SECRET = process.env.JWT_SECRET;
 
 //  Register
@@ -40,13 +38,10 @@ router.post(
           .status(400)
           .json({ success, message: "this user already exists" });
       }
-
       const myPass = req.body.password;
-
       // these are returning promises . Hence we should use await . here we encypting the password
       const salt = bcrypt.genSaltSync(saltRounds);
       const hash = bcrypt.hashSync(myPass, salt);
-
       user = await User.create({
         name: req.body.name,
         password: hash,
@@ -172,20 +167,18 @@ router.get("/findmyevents", async (req, res) => {
 // donation
 
 router.post("/donate", async (req, res) => {
-	try {
-		const targetNGO = await NGO.find({ email: req.body.ngoEmail });
-		targetNGO.funds += req.body.donationAmount;
-		await DonationLogs.create({
-			fromUser: req.body.email,
-			toNgo: targetNGO.email,
-			amount: req.body.donationAmount
-		});
+  try {
+    const targetNGO = await NGO.find({ email: req.body.ngoEmail });
+    targetNGO.funds += req.body.donationAmount;
+    await DonationLogs.create({
+      fromUser: req.body.email,
+      toNgo: targetNGO.email,
+      amount: req.body.donationAmount,
+    });
 
-		res.json({success: true});
-	}
-	catch (err) {
-		res.status(400).json({ error: err.message });
-	}
+    res.json({ success: true });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 });
-
 module.exports = router;
