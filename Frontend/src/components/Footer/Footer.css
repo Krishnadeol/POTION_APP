@@ -1,0 +1,21 @@
+.f-container{
+    justify-content: space-between;
+}
+
+.f-left{
+    gap: 1rem;
+}
+
+.f-menu{
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    font-weight: 600;
+    color: #13d9e0;
+}
+
+.i{
+    display: flex;
+    flex-direction: row;
+    color: rgb(255, 230, 9);
+    gap: 1rem;
+}
