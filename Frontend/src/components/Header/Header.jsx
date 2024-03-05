@@ -13,7 +13,7 @@ const Header = () => {
 
     return (
         <section className="h-wrapper">
-            <div className="flexCenter paddings innerWidth h-container">
+            <div className="flexCenter paddings innerWidth h-container head">
 
                 <img src="./HelenaFoodShareLogo.png" alt="logo" className="Logo" width={100} />
 
