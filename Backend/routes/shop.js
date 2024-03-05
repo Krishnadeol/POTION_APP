@@ -48,8 +48,8 @@ router.post(
           id: user.id,
         },
       };
-      const { password, ...userWithoutPassword } = user.toObject();
 
+      const { password, ...userWithoutPassword } = user.toObject();
       success = true;
       const token = jwt.sign(data, JWT_SECRET);
       res.json({ success, data });
@@ -67,6 +67,7 @@ router.post(
     body("email", "Enter a valid Email").isEmail(),
     body("pass", "Password should not be blank").exists(),
   ],
+
   async (req, res) => {
     // CHECKING FOR INFORMATION ENTERED BY THE USER
     const errors = validationResult(req);
@@ -77,8 +78,10 @@ router.post(
 
     try {
       //  destructuring of ther request
+
       const { email, pass } = req.body;
       let user = await User.findOne({ email });
+
       if (!user) {
         return res
           .status(400)
@@ -91,6 +94,7 @@ router.post(
           .status(400)
           .json({ success, error: "Please enter the correct credetials" });
       }
+
       const data = {
         user: {
           id: user.id,

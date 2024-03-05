@@ -12,12 +12,13 @@ const shopRouter = require("./routes/shop");
 app.get("/", (req, res) => {
   res.send("Hello betaji");
 });
+
 // routes =>
 app.use("/ngo", ngoRouter);
 app.use("/otp", mailRouter);
 app.use("/user", userRouter);
-
 app.use("/shop", shopRouter);
+
 connectToMongo()
   .then(() => {
     const server = app.listen(process.env.PORT, () =>

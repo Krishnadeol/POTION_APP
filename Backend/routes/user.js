@@ -22,6 +22,7 @@ router.post(
     body("password", "Password must have at least 5 characters").isLength({
       min: 5,
     }),
+    body("category", "Enter a valid Email").exists(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -46,6 +47,7 @@ router.post(
         name: req.body.name,
         password: hash,
         email: req.body.email,
+        category: req.body.category,
       });
 
       const data = {
