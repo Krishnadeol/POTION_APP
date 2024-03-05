@@ -7,7 +7,7 @@ const data = [
     icon: <FaHandHoldingHeart />,
     heading: "Facilitates food donations for the needy.",
     detail:
-      "Give hope with every click - donate food to the needy effortlessly.",
+      "Give hope with every click - donate food to the needy effortlessly, make a real impact on the lives of others.",
   },
   {
     //  icon: <FaBowlFood />,

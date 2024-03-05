@@ -238,6 +238,18 @@ router.get("/findusers", async (req, res) => {
 });
 
 // accept or reject the applied user.
+router.post("/application", async (req, res) => {
+  try {
+    const appl = await Applied.find({ email: req.body.userEmail });
+    if (appl) {
+      appl.state = req.body.accepted ? 1 : 2;
+      res.json({ success: true });
+    }
+    else res.status(400).json({ error: "Application not found" });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 // rate users work and give remarks for users.
 

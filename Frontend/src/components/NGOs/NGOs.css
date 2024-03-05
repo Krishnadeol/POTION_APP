@@ -1,8 +1,50 @@
-.c-container{
-    justify-content: space-around;
-    gap: 1rem;
+.logos{
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    padding: 30px;
 }
 
-.c-container>img{
-    width: 9rem;
+.logos:before, .logos:after{
+    position: absolute;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    content: "";
+    z-index: 2;
+}
+
+.logos:before{
+    left: 0;
+    background: linear-gradient(to left, rgba(255,255,255,0), white);
+}
+
+.logos:after{
+    right: 0;
+    background: linear-gradient(to right, rgba(255,255,255,0), white);
+}
+
+.logos:hover .logos-slide{
+    animation-play-state: paused;
+}
+
+.logos-slide{
+    justify-content: space-around; 
+    gap: 1rem;
+    display: inline-block;
+    animation: 15s slide infinite linear;
+}
+
+.logos-slide>img{
+    width: 12rem;
+    margin: 0 40px;
+}
+
+@keyframes slide{
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
 }

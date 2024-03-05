@@ -2,29 +2,29 @@
   {
     "name": "No Hungry Child",
     "amount": "1,88,450",
-    "detail": "This program is focused towards distributing nutritious & fresh food to poor, needy & hungry children in India.",
+    "detail": "Helps distribute nutritious fresh food to poor, needy & hungry children in India.",
     "image": "./MissionNoChildHungry.png"
   },
   {
     "name": "Annapurnaa",
     "amount": "99,353",
     "detail": "Helps distribute food to old age homes and supports the elderly.",
-    "image": "./oldFood.png"
+    "image": "./FeedOld.png"
   },
   {
     "name": "Mid Day Meal",
     "amount": "3,96,852",
-    "detail": "MDMS is a school meal program that provides free lunch to children in local schools.",
+    "detail": "A school meal program that provides free lunch to children in local schools.",
     "image": "./middaymeal.png"
   },
   {
     "name": "Mitti Cafe",
     "amount": "87,075",
-    "detail": "NGO for disabled people that empowers people to join together in fight against malnutrition.",
-    "image": "./DisabledEating.png"
+    "detail": "NGO for disabled people empowering people to fight against malnutrition.",
+    "image": "./DisabledEating2.png"
   },
   {
-    "name": "Akshaya Patra Kitchen",
+    "name": "Akshaya Patra",
     "amount": "2,92,000",
     "detail": "Program to provide affordable meals for everyone by building public kitchens.",
     "image": "./AkshayaPatra.png"
@@ -42,3 +42,4 @@
     "image": "./Iskcon.png"
   }
 ]
+
