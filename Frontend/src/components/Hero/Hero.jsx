@@ -1,13 +1,20 @@
 import React from 'react';
 import "./Hero.css";
+import { useState } from 'react'
+import Modal from "../Modal/Modal.jsx"
 import { IoFastFood } from "react-icons/io5";
 import Typewriter  from 'typewriter-effect';
 import CountUp from 'react-countup';
 
 const Hero = () => {
+
+    const [showModal, setShowModal] = useState(false)
+
     return (
         <section className="hero-wrapper">
+
             <div className="paddings innerWidth flexCenter hero-container">
+                {showModal && <Modal onClose={() => setShowModal(false)} />}
                 
                 {/* <!-- Left Side --> */}
                 <div className="flexColStart hero-left">
@@ -36,7 +43,7 @@ const Hero = () => {
                               }}
                             />
                         </div>
-                        <button className="button">Register</button>
+                        <button onClick={() => setShowModal(true)} className="button">Register</button>
                    </div>
 
                    <div className="flexCenter stats">
@@ -75,8 +82,8 @@ const Hero = () => {
                         <img src="./FoodChildEat2.jpg" alt="Children Eating Food" />
                     </div>
                 </div>
-
             </div>
+            
         </section>
     )
 }
