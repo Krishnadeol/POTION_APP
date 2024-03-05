@@ -1,13 +1,23 @@
-import React from 'react' 
+import React, {useState} from 'react' 
+import {BiMenuAltRight} from 'react-icons/bi'
 import './Header.css'
 
 const Header = () => {
+
+    const [menuOpened, setMenuOpened] = useState(false)
+    const getMenuStyles= (menuOpened) => {
+        if(document.documentElement.clientWidth <= 800){
+            return {right: !menuOpened && "-100%"}
+        }
+    }
+
     return (
         <section className="h-wrapper">
             <div className="flexCenter paddings innerWidth h-container">
+
                 <img src="./HelenaFoodShareLogo.png" alt="logo" className="Logo" width={100} />
 
-                <div className="flexCenter h-menu">
+                <div className="flexCenter h-menu" style={getMenuStyles(menuOpened)}>
                     <a href="">Programs</a> 
                     <a href="">Blogs</a>
                     <a href="">About us</a>
@@ -17,6 +27,11 @@ const Header = () => {
                         <a href="">Get Food</a>
                     </button>
                 </div>
+
+                <div className="menu-icon" onClick= { () => setMenuOpened((prev)=>!prev)}>
+                    <BiMenuAltRight size={30} />
+                </div>
+
             </div>
         </section>
     )
