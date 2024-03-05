@@ -17,7 +17,7 @@ const Header = () => {
 
                 <img src="./HelenaFoodShareLogo.png" alt="logo" className="Logo" width={100} />
 
-                <div className="flexCenter h-menu" style={getMenuStyles(menuOpened)}>
+                <div className="flexCenter h-menu nav" style={getMenuStyles(menuOpened)}>
                     <a href="">Programs</a> 
                     <a href="">Blogs</a>
                     <a href="">About us</a>
