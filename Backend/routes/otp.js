@@ -5,7 +5,8 @@ router.post("/", async (req, res) => {
   try {
     const { email } = req.body;
     const otp = await sendEmail(email);
-    return res.json({ OTP: otp });
+
+    return res.json({ otp: otp });
   } catch (error) {
     res.json({ error: error.message });
   }

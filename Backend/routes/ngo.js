@@ -24,6 +24,30 @@ const { find } = require("../models/UserApplied");
 //const fetchUser = require('../middleware/fetchUser');
 const JWT_SECRET = process.env.JWT_SECRET;
 
+router.post(
+  "/check_user",
+  [body("email", "Enter a valid Email").isEmail()],
+  async (req, res) => {
+    const errors = validationResult(req);
+    let check = false;
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ check, errors: errors.array() });
+    }
+    try {
+      let user = await Ngo.findOne({ email: req.body.email });
+      if (user) {
+        return res.json({ check });
+      }
+      check = true;
+
+      return res.json({ check });
+    } catch (error) {
+      console.log({ error: error.message });
+      res.json({ error: error.message });
+    }
+  }
+);
+
 //  Register
 router.post(
   "/Register",
@@ -244,8 +268,7 @@ router.post("/application", async (req, res) => {
     if (appl) {
       appl.state = req.body.accepted ? 1 : 2;
       res.json({ success: true });
-    }
-    else res.status(400).json({ error: "Application not found" });
+    } else res.status(400).json({ error: "Application not found" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

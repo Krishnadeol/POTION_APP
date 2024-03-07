@@ -13,6 +13,31 @@ const Applied = require("../models/UserApplied");
 const JWT_SECRET = process.env.JWT_SECRET;
 
 //  Register
+
+router.post(
+  "/check_user",
+  [body("email", "Enter a valid Email").isEmail()],
+  async (req, res) => {
+    const errors = validationResult(req);
+    let check = false;
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ check, errors: errors.array() });
+    }
+    try {
+      let user = await User.findOne({ email: req.body.email });
+      if (user) {
+        return res.json({ check });
+      }
+      check = true;
+
+      return res.json({ check });
+    } catch (error) {
+      console.log({ error: error.message });
+      res.json({ error: error.message });
+    }
+  }
+);
+
 router.post(
   "/Register",
   [
@@ -22,7 +47,7 @@ router.post(
     body("password", "Password must have at least 5 characters").isLength({
       min: 5,
     }),
-    body("category", "Enter a valid Email").exists(),
+    body("category", "Enter a valid category").exists(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
