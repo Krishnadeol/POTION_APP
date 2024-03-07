@@ -14,8 +14,8 @@ async function sendEmail(email) {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "dps.krishnadeol.12a@gmail.com", // Gmail email address
-        pass: "clwd dhqx dqiq nobv", // Gmail App Password  2fa authentication ke bad banega
+        user: "", // Gmail email address
+        pass: "", // Gmail App Password  2fa authentication ke bad banega
       },
     });
 
