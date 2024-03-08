@@ -4,6 +4,7 @@ import "swiper/css"
 import './Programs.css'
 import data from '../../utils/slider.json'
 import {sliderSettings} from "../../utils/common";
+import transition from "../../transition"
 
 const Programs = () => {
     return (
@@ -30,7 +31,8 @@ const Programs = () => {
                                     </span>
                                     <span className="primaryText">{card.name}</span>
                                     <span className="secondaryText">{card.detail}</span>
-
+                                    <div className="text-center"><button className="button" style={{textalign: "center"}}>Donate Now</button></div>
+                                    
                                 </div>
                             </SwiperSlide>
                         ))
@@ -42,13 +44,13 @@ const Programs = () => {
     )
 }
 
-export default Programs
+export default transition(Programs);
 
 const SliderButtons = () => {
     return (
         <div className="flexCenter r-button">
-            <button onClick={()=> Swiper.slidePrev()}>&lt;</button>
-            <button onClick={()=> Swiper.slideNext()}>&gt;</button>
+            <button onClick={()=> swiper.slidePrev()}>&lt;</button>
+            <button onClick={()=> swiper.slideNext()}>&gt;</button>
         </div>
     );
 };
