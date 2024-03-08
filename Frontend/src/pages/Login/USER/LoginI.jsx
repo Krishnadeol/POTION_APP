@@ -10,7 +10,6 @@ function LoginI() {
     email: "",
     password: "",
   });
-
   const tobj = {
     position: "bottom-right",
     autoclose: 5000,
