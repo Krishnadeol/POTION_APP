@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Accordion, AccordionItem, AccordionItemHeading, AccordionItemButton, AccordionItemPanel, AccordionItemState} from "react-accessible-accordion";
 import "react-accessible-accordion/dist/fancy-example.css";
 import {MdOutlineArrowDropDown, MdOutlineArrowDropDownCircle} from "react-icons/md";
+import transition from "../../transition"
 import "./WhatWeDo.css";
 import data from "../../utils/accordion.jsx";
 
@@ -66,4 +67,4 @@ const WhatWeDo = () => {
     );
 };
 
-export default WhatWeDo;
+export default transition(WhatWeDo);
