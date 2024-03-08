@@ -14,7 +14,6 @@ const Hero = () => {
         <section className="hero-wrapper">
 
             <div className="paddings innerWidth flexCenter hero-container">
-                {showModal && <Modal onClose={() => setShowModal(false)} />}
                 
                 {/* <!-- Left Side --> */}
                 <div className="flexColStart hero-left">
@@ -27,6 +26,8 @@ const Hero = () => {
                         </h1>
                    </div>
 
+                   {showModal && <Modal onClose={() => setShowModal(false)} />}
+                    
                    <div className="flexColStart hero-des">
                         <span>Join us in the fight against hunger, providing food for all.</span>
                         <span>Offering food at reasonable price, turning waste into compassion.</span>
