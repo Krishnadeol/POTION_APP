@@ -19,3 +19,13 @@
     color: rgb(255, 230, 9);
     gap: 1rem;
 }
+
+@media (max-width: 768px){
+    .f-container{
+        justify-content: center;
+    }
+    .f-container>div{
+        align-items: center !important;
+        text-align: center;
+    }
+}
