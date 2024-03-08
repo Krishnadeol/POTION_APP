@@ -48,7 +48,7 @@ function Registern() {
       });
 
       if (data.success) {
-        localStorage.setItem("crowd-app-user-data", JSON.stringify(data.user));
+        localStorage.setItem("crowd-app-ngo-data", JSON.stringify(data.user));
         navigate("/login");
       } else if (!data.success) {
         toast.error(data.error, tobj);

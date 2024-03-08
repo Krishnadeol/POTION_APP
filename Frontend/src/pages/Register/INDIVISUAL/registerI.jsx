@@ -49,7 +49,7 @@ function RegisterI() {
         category: cred.category,
       });
       if (data.success) {
-        localStorage.setItem("crowd-app-user-data", JSON.stringify(data.user));
+        localStorage.setItem("crowd-app-ind-data", JSON.stringify(data.user));
         navigate("/login");
       } else if (!data.success) {
         toast.error(data.error, tobj);
@@ -177,6 +177,7 @@ function RegisterI() {
           already have an account ?<Link to="/login">Login</Link>
         </span>
       </form>
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Otp Verification</Modal.Title>
