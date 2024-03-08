@@ -60,5 +60,28 @@
 }
 
 .img-con{
-    margin-left: 130px;
+    margin-left: 120px;
+}
+
+@media (max-width: 640px){
+    .c-container{
+        flex-direction: column;
+    }
+    .c-right{
+        justify-content: center;
+    }
+    .row{
+        flex-direction: column;
+        width: 100%;
+    }
+    .mode{
+        width: 100%;
+    }
+    .image-container{
+        width: 95%;
+        height: 35rem;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
