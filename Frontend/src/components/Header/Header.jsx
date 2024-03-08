@@ -1,5 +1,6 @@
 import React, {useState} from 'react' 
 import {BiMenuAltRight} from 'react-icons/bi'
+import OutsideClickHandler from "react-outside-click-handler";
 import './Header.css'
 
 const Header = () => {
@@ -17,6 +18,7 @@ const Header = () => {
 
                 <img src="./HelenaFoodShareLogo.png" alt="logo" className="Logo" width={100} />
 
+                <OutsideClickHandler onOutsideClick= { ()=> {setMenuOpened(false)}}>
                 <div className="flexCenter h-menu nav" style={getMenuStyles(menuOpened)}>
                     <a href="">Programs</a> 
                     <a href="">Blogs</a>
@@ -27,6 +29,7 @@ const Header = () => {
                         <a href="">Get Food</a>
                     </button>
                 </div>
+                </OutsideClickHandler>
 
                 <div className="menu-icon" onClick= { () => setMenuOpened((prev)=>!prev)}>
                     <BiMenuAltRight size={30} />
@@ -37,4 +40,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default Header;
