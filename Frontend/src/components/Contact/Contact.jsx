@@ -3,6 +3,7 @@ import {MdCall} from 'react-icons/md'
 import {BsFillChatDotsFill} from 'react-icons/bs'
 import { MdMarkEmailRead } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
+import transition from "../../transition"
 import './Contact.css'
 
 const Contact = () => {
@@ -103,4 +104,4 @@ const Contact = () => {
   )
 }
 
-export default Contact
+export default transition(Contact);
