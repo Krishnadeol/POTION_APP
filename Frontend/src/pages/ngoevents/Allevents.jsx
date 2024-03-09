@@ -29,6 +29,14 @@ export default function Allevents() {
     theme: "dark",
   };
 
+  const tobj1 = {
+    position: "bottom-right",
+    autoclose: 5000,
+    pauseOnhover: true,
+    draggable: true,
+    theme: "green",
+  };
+
   // For showing add modal for adding an event
   const [showA, setShowA] = useState(false);
   const handleCloseA = () => {
@@ -56,6 +64,22 @@ export default function Allevents() {
   // Modal to add event
   const handleAdd = async () => {
     try {
+      let { data } = await axios.post("http://localhost:5000/ngo/addevent", {
+        email: cred.email,
+        name: cred.name,
+        description: cred.description,
+        startDate: cred.startDate,
+        stipend: cred.stipend,
+        endDate: cred.endDate,
+        oppportunity: cred.opportunity,
+      });
+
+      if (data.success) {
+        toast.error("Event added successfully ", tobj);
+      } else {
+        toast.error(" Server error", tobj1);
+        alert("not sending the request");
+      }
     } catch (error) {
       console.log({ error: error.message });
     }
