@@ -47,6 +47,8 @@ const Programs = () => {
 export default transition(Programs);
 
 const SliderButtons = () => {
+
+    const swiper=useSwiper();
     return (
         <div className="flexCenter r-button">
             <button onClick={()=> swiper.slidePrev()}>&lt;</button>
