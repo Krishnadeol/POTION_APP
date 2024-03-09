@@ -121,16 +121,16 @@ router.post(
 
       const passCompare = await bcrypt.compare(pass, user.password);
       if (!passCompare) {
-        res
+        return res
           .status(400)
           .json({ success, error: "Please enter the correct credetials" });
       }
+
       const data = {
         user: {
           id: user.id,
         },
       };
-
       const { password, ...userWithoutPassword } = user.toObject();
 
       success = true;

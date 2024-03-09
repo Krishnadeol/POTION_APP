@@ -176,7 +176,10 @@ router.post(
     body("email", "Enter a valid Email").isEmail(),
     body("startDate", "Start Date should not be blank").exists(),
     body("name", "Name of the event not included").exists(),
-    body("description", "Name of the event not included").isLength({ min: 5 }),
+    body(
+      "description",
+      "Discription of the event not be less than 5 characters"
+    ).isLength({ min: 5 }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -250,7 +253,7 @@ router.delete("/deleteevent/:_id", async (req, res) => {
 
 // uploading documents
 
-// find Users who applied for the an event  show applicants
+// find Users who applied for the an event
 router.get("/findusers", async (req, res) => {
   try {
     const data = await Applied.find({ Eid: req.body.eid });
