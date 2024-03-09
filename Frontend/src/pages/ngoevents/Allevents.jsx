@@ -29,18 +29,10 @@ export default function Allevents() {
     theme: "dark",
   };
 
-  const tobj1 = {
-    position: "bottom-right",
-    autoclose: 5000,
-    pauseOnhover: true,
-    draggable: true,
-    theme: "green",
-  };
-
   // For showing add modal for adding an event
   const [showA, setShowA] = useState(false);
   const handleCloseA = () => {
-    if (handleValid()) {
+    if (handleValidA()) {
       cred.email = curUser.email;
       console.log(cred);
       handleAdd();
@@ -49,7 +41,7 @@ export default function Allevents() {
   };
   const handleShowA = () => setShowA(true);
 
-  const handleValid = () => {
+  const handleValidA = () => {
     if (
       cred.email === "" ||
       cred.name === "" ||
@@ -75,9 +67,9 @@ export default function Allevents() {
       });
 
       if (data.success) {
-        toast.error("Event added successfully ", tobj);
+        toast.success("Event added successfully ", tobj);
       } else {
-        toast.error(" Server error", tobj1);
+        toast.error(" Server error", tobj);
         alert("not sending the request");
       }
     } catch (error) {
