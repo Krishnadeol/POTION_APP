@@ -10,7 +10,6 @@ const Modal = ({onClose}) => {
         <div className="Modal">
             <div className="popUp">
 
-
                 <button onClick={onClose} className='cross'><IoIosClose size={30}/></button>
 
                 <div className="container">
