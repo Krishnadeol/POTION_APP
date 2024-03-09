@@ -16,7 +16,9 @@
 
 .contactModes{
     margin-top: 2rem;
-    gap: 1rem;
+    gap: 2rem;
+    display: flex;
+    flex-direction: row;
 }
 
 .contactModes .row{

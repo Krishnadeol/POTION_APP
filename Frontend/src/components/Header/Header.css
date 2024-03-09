@@ -39,6 +39,16 @@
 .but{
     border-radius: 20px;
 }
+.but2{
+    color: orangered;
+    text-decoration: none; 
+    color: inherit;
+}
+
+.nav{
+    text-decoration: none; 
+    color: inherit;
+}
 
 @media (max-width: 768px){
     .menu-icon{
