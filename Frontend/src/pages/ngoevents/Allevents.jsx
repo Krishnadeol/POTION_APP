@@ -28,19 +28,36 @@ export default function Allevents() {
     draggable: true,
     theme: "dark",
   };
+  const [eventId, setId] = useState("");
+  // for showing the deleting option for a modal
+  const [showD, setShowD] = useState(false);
+  const handleShowD = (id) => {
+    setId(id);
+    setShowD(true);
+  };
+  const handleCloseD = () => {};
+  const handleDelete = async (id) => {
+    try {
+      setShowD(false);
 
-  const tobj1 = {
-    position: "bottom-right",
-    autoclose: 5000,
-    pauseOnhover: true,
-    draggable: true,
-    theme: "green",
+      const { data } = await axios.delete(
+        `http://localhost:5000/ngo/deleteevent/${eventId}`
+      );
+      if (data.success) toast.success("Event deleted successfully", tobj);
+      else toast.error("Event deleted successfully", tobj);
+    } catch (error) {
+      toast.error(error.message, tobj);
+    }
   };
 
   // For showing add modal for adding an event
   const [showA, setShowA] = useState(false);
   const handleCloseA = () => {
-    if (handleValid()) {
+    setShowA(false);
+  };
+
+  const handleA = () => {
+    if (handleValidA()) {
       cred.email = curUser.email;
       console.log(cred);
       handleAdd();
@@ -49,7 +66,7 @@ export default function Allevents() {
   };
   const handleShowA = () => setShowA(true);
 
-  const handleValid = () => {
+  const handleValidA = () => {
     if (
       cred.email === "" ||
       cred.name === "" ||
@@ -61,6 +78,7 @@ export default function Allevents() {
       return false;
     } else return true;
   };
+
   // Modal to add event
   const handleAdd = async () => {
     try {
@@ -75,9 +93,9 @@ export default function Allevents() {
       });
 
       if (data.success) {
-        toast.error("Event added successfully ", tobj);
+        toast.success("Event added successfully ", tobj);
       } else {
-        toast.error(" Server error", tobj1);
+        toast.error(" Server error", tobj);
         alert("not sending the request");
       }
     } catch (error) {
@@ -119,13 +137,12 @@ export default function Allevents() {
     const cards = myEvents.map((event) => (
       <li key={event._id}>
         <h1>{event.name}</h1>
+        {/* <button onClick={handleShowE(event._id)}>Edit</button>*/}
+        <button onClick={() => handleShowD(event._id)}>Delete</button>
       </li>
     ));
     return cards;
   }
-
-  // A MODAL OPENS TO CONFIRM WHETHER TO DELETE OR NOT
-  const handleDelete = async () => {};
 
   // a modal with all input fields but only the one that have to be updated must be changed
   const handleEdit = async () => {};
@@ -214,11 +231,32 @@ export default function Allevents() {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleCloseA}>
+          <Button variant="primary" onClick={handleA}>
             Add event
           </Button>
         </Modal.Footer>
       </Modal>
+
+      <Modal
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={showD}
+        onHide={handleCloseD}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Delete event
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Sure you want to delete it</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleDelete}>Delete</Button>
+        </Modal.Footer>
+      </Modal>
+
       <ToastContainer />
     </>
   );
