@@ -3,8 +3,8 @@ import './signUp.css'
 
 const signUp = () => {
     return (
-        <div class="container">
-        <div class="signin-signup">
+        <div className="container">
+            <div className="signin-signup">
             <form action="" class="sign-in-form">
                 <h2 class="title">Sign in</h2>
                 <div class="input-field">
