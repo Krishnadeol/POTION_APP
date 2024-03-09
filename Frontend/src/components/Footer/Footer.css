@@ -16,10 +16,60 @@
 .i{
     display: flex;
     flex-direction: row;
-    color: rgb(255, 230, 9);
+    color: rgb(248, 224, 2);
     gap: 1rem;
 }
 
+.nav{
+    text-decoration: none; 
+    color: inherit;
+}
+
+
+/*Animation*/
+@keyframes heartbeat{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.35);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+.Facebook, .Twitter, .Instagram, .Linkedin{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.Facebook:hover{
+    animation: heartbeat 1s infinite;
+    fill: #4267B2;
+    color: #4267B2;
+    opacity: 1.0;
+}
+
+.Twitter:hover{
+    animation: heartbeat 1s infinite;
+    fill:  #000000;
+    color: #000000;
+}
+
+.Instagram:hover{
+    animation: heartbeat 1s infinite;
+    fill:  #f46ca5;
+    color: #f46ca5;
+}
+
+.Linkedin:hover{
+    animation: heartbeat 1s infinite;
+    fill:  #05e6ff;
+    color: #05e6ff;
+}
+
+/*Responsive*/
 @media (max-width: 768px){
     .f-container{
         justify-content: center;

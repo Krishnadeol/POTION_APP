@@ -73,7 +73,8 @@ a {
 }
 
 .secondaryText {
-  color: #000000;
+  color: #060000;
+  font-weight: 440;
   font-size: 0.9rem;
 }
 .orangeText {

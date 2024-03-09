@@ -1,5 +1,6 @@
 import React, {useState} from 'react' 
 import {BiMenuAltRight} from 'react-icons/bi'
+import { Link } from "react-router-dom"
 import OutsideClickHandler from "react-outside-click-handler";
 import './Header.css'
 
@@ -26,7 +27,7 @@ const Header = () => {
                     <a href="" className="nav">Contact us</a>
                     <a href="" className="nav">Donate Now</a>
                     <button className="button but">
-                        <a href="">Get Food</a>
+                        <a href="" className="but2">Get Food</a>
                     </button>
                 </div>
                 </OutsideClickHandler>

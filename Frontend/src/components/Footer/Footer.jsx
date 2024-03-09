@@ -13,10 +13,10 @@ const Footer = () => {
                 <img src="./HelenaFoodShareLogo.png" alt="logo" width={100} />
                 <span className="secondaryText">Our vision is to make a world free from Hunger.</span>
                 <div className="i">
-                    <FaFacebook size={25}/>
-                    <FaSquareXTwitter size={25}/>
-                    <FaInstagram size={25}/>
-                    <FaLinkedin size={25}/>
+                    <FaFacebook size={25} className="Facebook" />
+                    <FaSquareXTwitter size={25} className="Twitter" />
+                    <FaInstagram size={25} className="Instagram" />
+                    <FaLinkedin size={25} className="Linkedin" />
                 </div>
             </div>
 
@@ -24,10 +24,10 @@ const Footer = () => {
                 <span className="primaryText">Information</span>
                 <span className="secondaryText">Netaji Subhash Palace, New Delhi</span>
                 <div className="flexCenter f-menu">
-                    <a href="">Programs</a>
-                    <a href="">Blogs</a>
-                    <a href="">Donate Now</a>
-                    <a href="">Get Food</a>
+                    <a href="" className="nav">Programs</a>
+                    <a href="" className="nav">Blogs</a>
+                    <a href="" className="nav">Donate Now</a>
+                    <a href="" className="nav">Get Food</a>
                 </div>
             </div>
         </div>

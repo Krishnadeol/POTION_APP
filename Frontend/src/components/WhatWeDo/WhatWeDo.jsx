@@ -22,7 +22,7 @@ const WhatWeDo = () => {
 
                 {/* right side */}
                 <div className="flexColStart v-right">
-                    <span className="orangeText">Glimpse of</span>
+                    <span className="tt">Glimpse of</span>
                     <span className="primaryText">What We Do</span>
                     <span className="secondaryText">
                     Empower communities by promoting food security and sustainability.
@@ -47,7 +47,7 @@ const WhatWeDo = () => {
                                                     { ({expanded}) => expanded ? setClassName("expanded") : setClassName("collapsed") }
                                                 </AccordionItemState>
                                                 <div className="flexCenter icon">{item.icon}</div>
-                                                <span className="primaryText">{item.heading}</span>
+                                                <span className="primarytext">{item.heading}</span>
                                                 <div className="flexCenter icon"><MdOutlineArrowDropDown size={20}/></div>
                                             </AccordionItemButton>
                                         </AccordionItemHeading>
