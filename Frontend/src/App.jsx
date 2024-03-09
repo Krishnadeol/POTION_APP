@@ -16,7 +16,6 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          {/*My Name is Manan*/}
           <Route path="/" element={<Home />} />
           <Route path="/ngo_register" element={<Registern />} />
           <Route path="/ind_register" element={<RegisterI />} />

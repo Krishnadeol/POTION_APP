@@ -19,13 +19,13 @@ const Header = () => {
                 <img src="./HelenaFoodShareLogo.png" alt="logo" className="Logo" width={100} />
 
                 <OutsideClickHandler onOutsideClick= { ()=> {setMenuOpened(false)}}>
-                <div className="flexCenter h-menu nav" style={getMenuStyles(menuOpened)}>
-                    <a href="">Programs</a> 
-                    <a href="">Blogs</a>
-                    <a href="">About us</a>
-                    <a href="">Contact us</a>
-                    <a href="">Donate Now</a>
-                    <button className="button">
+                <div className="flexCenter h-menu" style={getMenuStyles(menuOpened)}>
+                    <a href="" className="nav">Programs</a> 
+                    <a href="" className="nav">Blogs</a>
+                    <a href="" className="nav">About us</a>
+                    <a href="" className="nav">Contact us</a>
+                    <a href="" className="nav">Donate Now</a>
+                    <button className="button but">
                         <a href="">Get Food</a>
                     </button>
                 </div>

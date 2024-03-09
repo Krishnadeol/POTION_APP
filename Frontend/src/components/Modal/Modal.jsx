@@ -1,5 +1,5 @@
 import React from 'react'
-import { X } from 'lucide-react';
+import {Link} from "react-router-dom";
 import { IoIosClose } from "react-icons/io";
 import signUp from "../signUp/signUp.jsx"
 import "./Modal.css";
@@ -11,7 +11,7 @@ const Modal = ({onClose}) => {
             <div className="popUp">
                 <button onClick={onClose} className='cross'><IoIosClose size={30}/></button>
                 <div className="signup-login">
-                    <signUp />
+                    <signUp/>
                     gggoeihgoiehgoiehgojfrjni
                     grhh
                     rtgrterergergetgergerferf
@@ -25,6 +25,11 @@ const Modal = ({onClose}) => {
                  grtgrt
                  <br/>
                  right
+                 <br/>
+                 frfrffrfrfrf
+                 <br/>
+                 frfrfrff
+                 <button className="button"><a href="https://www.geeksforgeeks.org/ford-fulkerson-algorithm-for-maximum-flow-problem/">Open Up</a></button>
                 </div>
             </div>
         </div>
