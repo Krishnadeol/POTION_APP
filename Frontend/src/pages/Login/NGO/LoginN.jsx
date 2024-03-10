@@ -65,7 +65,7 @@ function LoginN() {
 
   return (
     <>
-      \{" "}
+      
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="brand">
           <h1>Crowd App</h1>
