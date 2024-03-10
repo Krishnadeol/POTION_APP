@@ -21,6 +21,8 @@ export default function Allevents() {
     opportunity: "",
   });
 
+  const [appUser, setappUser] = useState([]);
+
   const tobj = {
     position: "bottom-right",
     autoclose: 5000,
@@ -31,8 +33,10 @@ export default function Allevents() {
   // for editing an event
 
   const [showE, setShowE] = useState(false);
+
   const handleShowE = (event) => {
-    // set the inputs for the changes
+    setcred([]);
+    setcred({ ...cred, ...event });
     setId(event._id);
     setShowE(true);
   };
@@ -74,11 +78,12 @@ export default function Allevents() {
     setId(id);
     setShowD(true);
   };
-  const handleCloseD = () => {};
+  const handleCloseD = () => {
+    setShowD(false);
+  };
   const handleDelete = async (id) => {
     try {
-      setShowD(false);
-
+      handleCloseD();
       const { data } = await axios.delete(
         `http://localhost:5000/ngo/deleteevent/${eventId}`
       );
@@ -90,6 +95,7 @@ export default function Allevents() {
   };
 
   // For  adding an event
+
   const [showA, setShowA] = useState(false);
   const handleCloseA = () => {
     setShowA(false);
@@ -103,7 +109,11 @@ export default function Allevents() {
       setShowA(false);
     } else return;
   };
-  const handleShowA = () => setShowA(true);
+
+  const handleShowA = () => {
+    setcred([]);
+    setShowA(true);
+  };
 
   const handleValidA = () => {
     if (
@@ -157,14 +167,6 @@ export default function Allevents() {
         } else {
           console.log(localStorage.getItem("crowd-app-ngo-data"));
           setUser(JSON.parse(localStorage.getItem("crowd-app-ngo-data")));
-
-          // const { data } = await axios.get(
-          //   `http://localhost:5000/ngo/getevents?email=${curUser.email}`
-          // );
-
-          // setEvents(data.data);
-          // console.log(myEvents);
-          // cred.email = curUser.email;
         }
       } catch (error) {
         console.log({ error: error.message });
@@ -194,9 +196,24 @@ export default function Allevents() {
     const cards = myEvents.map((event) => (
       <li key={event._id}>
         <h1>{event.name}</h1>
-        {/*   <button onClick={handleShowE(event)}>Edit</button>*/}
-        {/*for passing the reference of the function  use this syntax */}
-        <button onClick={() => handleShowD(event._id)}>Delete</button>
+
+        <button
+          onClick={() => {
+            handleShowE(event);
+          }}
+        >
+          {" "}
+          Edit
+        </button>
+
+        {/* The refrence passing in the button */}
+        <button
+          onClick={() => {
+            handleShowD(event._id);
+          }}
+        >
+          Delete
+        </button>
       </li>
     ));
     return cards;
@@ -313,6 +330,9 @@ export default function Allevents() {
         <Modal.Footer>
           <Button onClick={handleDelete}>Delete</Button>
         </Modal.Footer>
+        <Modal.Footer>
+          <Button onClick={handleCloseD}>No</Button>
+        </Modal.Footer>
       </Modal>
 
       {/*modal for editing and event */}
@@ -393,7 +413,6 @@ export default function Allevents() {
           </Button>
         </Modal.Footer>
       </Modal>
-
       <ToastContainer />
     </>
   );
