@@ -8,6 +8,8 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import {FaUser, FaLock} from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import transition from "../../../transition";
+import video from "../../../../public/Zero Hunger Film _ Global Goals.mp4"
 import "./ngor.css"
 
 function Registern() {
@@ -116,10 +118,11 @@ function Registern() {
 
 
   return (
-
+  <div className="bgContainer">
+  <div className="overlay">
+    <video  className="vid" src={video} autoPlay={true} loop />
     <div className="bd">
-    <div className="wrapper">
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form className="wrapper" onSubmit={(e) => handleSubmit(e)}>
         
         <h1>Sign UP</h1>
         
@@ -166,7 +169,7 @@ function Registern() {
         </div>
         <button type="submit">Get Started</button>
         <div className="login-link">
-          <p>Already have an account?<Link to="/login">Login</Link></p>
+          <p>Already have an account?<Link to="/ngo_login"> SignIn</Link></p>
         </div>
       </form>
 
@@ -196,8 +199,9 @@ function Registern() {
 
       <ToastContainer />
     </div>
-    </div>
+  </div>
+  </div>
   );
 }
 
-export default Registern;
+export default transition(Registern);

@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {FaUser, FaLock} from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import transition from "../../../transition"
+import video from "../../../../public/Zero Hunger Film _ Global Goals.mp4"
 import axios from "axios";
+import './loignN.css'
 
 function LoginN() {
   const navigate = useNavigate();
@@ -64,36 +69,48 @@ function LoginN() {
   };
 
   return (
-    <>
-      
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div className="brand">
-          <h1>Crowd App</h1>
-        </div>
+  <>
+  <div className="bgContainer">
+  <div className="overlay">
+    <video  className="vid" src={video} autoPlay={true} loop />
+    <div className="bd">
+      <form className="wrapper" onSubmit={(e) => handleSubmit(e)}>
+  
+          <h1>Sign In</h1>
 
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          value={cred.email}
-          required
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={cred.password}
-          onChange={handleChange}
-        />
+          <div className="input-box  inp">
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              value={cred.email}
+              required
+              onChange={handleChange}
+            />
+            <MdEmail className="ic" />
+          </div>
+          <div className="input-box">
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={cred.password}
+              onChange={handleChange}
+            />
+            <FaLock className="ic" />
+          </div>
 
-        <button type="submit">Login in</button>
-        <span>
-          Dont have an account ?<Link to="/registern">Signup</Link>
-        </span>
+          <button type="submit">Welcome</button>
+          <div className="register-link">
+            <p>Already have an account?<Link to="/ngo_register"> SignUp</Link></p>
+          </div>
+
       </form>
       <ToastContainer />
-    </>
+    </div>
+  </div>
+  </div>
+  </>
   );
 }
-export default LoginN;
+export default transition(LoginN);

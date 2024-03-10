@@ -1,7 +1,9 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 import { IoIosClose } from "react-icons/io";
-import signUp from "../signUp/signUp.jsx"
+import { BiSolidBuildingHouse } from "react-icons/bi";
+import {FaUser, FaStore} from "react-icons/fa";
+import signUp from "../signUp/signUp"
 import "./Modal.css";
 
 const Modal = ({onClose}) => {
@@ -17,67 +19,70 @@ const Modal = ({onClose}) => {
 
                         <form action="" className="sign-in-form">
                             <h2 className="title">Sign in</h2>
-
+  
+                            {/*Individal*/}
                             <div className="input-field">
-                              <i className="fas fa-user"></i>
-                              {/*<input type="text" placeholder="Username" />*/}
+                              <FaUser className="i" />
                               <input type="radio" className="signIn" value="USER" id="signIn"/>
                               <label htmlFor="User">User</label>
                             </div>
+                            {/*NGO*/}
                             <div className="input-field">
-                              <i className="fas fa-lock"></i>
-                              {/*<input type="password" placeholder="Password" />*/}
+                              <BiSolidBuildingHouse className="i" /> 
                               <input type="radio" className="signIn" value="NGO" id="signIn"/>
                               <label htmlFor="Ngo">ngo</label>
                             </div>
-                            <div class="input-field">
-                              <i class="fas fa-user"></i>
-                              {/*<input type="text" placeholder="Username" />*/}
+                            {/*StoreOwner*/}
+                            <div className="input-field">
+                              <FaStore className="i" />
                               <input type="radio" className="signIn" value="STORE" id="signIn"/>
                               <label for="Store">StoreOwner</label>
                             </div>
-                            <input type="submit" value="Login" class="btn" />
-                
-                            <p class="account-text">Don't have an account?<a href="#" id="sign-up-btn2">Sign up</a></p>
+
+                            <input type="submit" value="Login" className="btn" />
+                            <p className="account-text">Don't have an account?<a href="#" id="sign-up-btn2">Sign up</a></p>
                         </form>
 
-                        <form action="" class="sign-up-form">
-                            <h2 class="title">Sign up</h2>
+                        <form action="" className="sign-up-form">
+                            <h2 className="title">Sign up</h2>
 
-                            <div class="input-field">
-                              <i class="fas fa-user"></i>
+                            {/*Individual*/}
+                            <div className="input-field">
+                              <FaUser className="i" />
                               <input type="text" placeholder="Username" />
                             </div>
-                            <div class="input-field">
-                              <i class="fas fa-envelope"></i>
+                            {/*NGO*/}
+                            <div className="input-field">
+                              <BiSolidBuildingHouse className="i" /> 
                               <input type="text" placeholder="Email" />
                             </div>
-                            <div class="input-field">
-                              <i class="fas fa-lock"></i>
+                            {/*StoreOwner*/}
+                            <div className="input-field">
+                              <FaStore className="i" />
                               <input type="password" placeholder="Password" />
                             </div>
-                            <input type="submit" value="Sign up" class="btn" />
+                            <input type="submit" value="Sign up" className="btn" />
                 
-                            <p class="account-text">Already have an account? <a href="#" id="sign-in-btn2">Sign in</a></p>
+                            <p className="account-text">Already have an account? <a href="#" id="sign-in-btn2">Sign in</a></p>
                         </form>
 
                     </div>
-                    <div class="panels-container">
-                        <div class="panel left-panel">
-                            <div class="content">
+                    <div className="panels-container">
+                        <div className="panel left-panel">
+                            <div className="content">
                               <h3>Member of Brand?</h3>
                               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque accusantium dolor, eos incidunt minima iure?</p>
-                              <button class="btn" id="sign-in-btn">Sign in</button>
+                              <button className="btn" id="sign-in-btn">Sign in</button>
                             </div>
                             <img src="Iskcon.png" alt="" class="image" />
                         </div>
-                        <div class="panel right-panel">
-                            <div class="content">
+                        <div className="panel right-panel">
+                            <div className="content">
                               <h3>New to Brand?</h3>
                               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque accusantium dolor, eos incidunt minima iure?</p>
-                              <button class="btn" id="sign-up-btn">Sign up</button>
+                              <button className="btn" id="sign-up-btn">Sign up</button>
                             </div>
-                            <img src="PMPOSHAN.png" alt="" class="image" />
+                            <img src="PMPOSHAN.png" alt="" className="image" />
                         </div>
                     </div>
                 </div>
