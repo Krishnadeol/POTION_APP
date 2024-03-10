@@ -1,9 +1,4 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body{
+.bd{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,10 +6,14 @@ body{
     background: url('../../../../public/BackgroundSignUp.jpeg') no-repeat;
     background-size: cover;
     background-position: center;
+    margin-right: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+
 .wrapper{
-    width: 100%;
+    width: 21%;
     background: transparent;
     backdrop-filter: blur(30px);
     box-shadow: 0 0 10px rgba(0,0,0, .2);
@@ -34,7 +33,7 @@ body{
     position: relative;
     width: 100%;
     height: 50px;
-    margin: 10px ;
+    margin: 10px;
     margin-right: -20px;
 }
 

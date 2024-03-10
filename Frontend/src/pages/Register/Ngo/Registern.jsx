@@ -117,7 +117,7 @@ function Registern() {
 
   return (
 
-    <div className="body">
+    <div className="bd">
     <div className="wrapper">
       <form onSubmit={(e) => handleSubmit(e)}>
         
