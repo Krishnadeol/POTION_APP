@@ -21,8 +21,6 @@ export default function Allevents() {
     opportunity: "",
   });
 
-  const [appUser, setappUser] = useState([]);
-
   const tobj = {
     position: "bottom-right",
     autoclose: 5000,
@@ -30,6 +28,34 @@ export default function Allevents() {
     draggable: true,
     theme: "dark",
   };
+
+  // for applicants of a particular events
+
+  // const [showApp, setshowApp] = useState(false);
+
+  // const handleCloseApp = () => {
+  //   setshowApp(false);
+  // };
+
+  const [appUser, setappUser] = useState([]);
+  const handleShowApp = async (id) => {
+    try {
+      const { data } = await axios.get("http://localhost:5000/ngo/findusers", {
+        eid: id,
+      });
+      console.log(data);
+
+      if (data.success) {
+        setappUser(data.data);
+        console.log("users applied", appUser);
+      } else {
+        toast.error("Some Error occured ", tobj);
+      }
+    } catch (error) {
+      toast.error("Some sever erorr", tobj);
+    }
+  };
+
   // for editing an event
 
   const [showE, setShowE] = useState(false);
@@ -157,7 +183,6 @@ export default function Allevents() {
     setcred({ ...cred, [e.target.name]: e.target.value });
   };
 
-  // for mapping the data
   const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
@@ -196,6 +221,15 @@ export default function Allevents() {
     const cards = myEvents.map((event) => (
       <li key={event._id}>
         <h1>{event.name}</h1>
+
+        <button
+          onClick={() => {
+            handleShowApp(event._id);
+          }}
+        >
+          {" "}
+          Show Applicants
+        </button>
 
         <button
           onClick={() => {
@@ -328,10 +362,8 @@ export default function Allevents() {
           <p>Sure you want to delete it</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={handleDelete}>Delete</Button>
-        </Modal.Footer>
-        <Modal.Footer>
           <Button onClick={handleCloseD}>No</Button>
+          <Button onClick={handleDelete}>Delete</Button>
         </Modal.Footer>
       </Modal>
 

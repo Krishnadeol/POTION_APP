@@ -6,9 +6,9 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import {FaUser, FaLock} from "react-icons/fa";
+import { FaUser, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import "./ngor.css"
+import "./ngor.css";
 
 function Registern() {
   const navigate = useNavigate();
@@ -113,17 +113,13 @@ function Registern() {
     setCred({ ...cred, [e.target.name]: e.target.value });
   };
 
-
-
   return (
-
     <div className="bd">
-    <div className="wrapper">
-      <form onSubmit={(e) => handleSubmit(e)}>
-        
-        <h1>Sign UP</h1>
-        
-        <div className="input-box">
+      <div className="wrapper">
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <h1>Sign UP</h1>
+
+          <div className="input-box">
             <input
               type="text"
               placeholder="Username"
@@ -131,9 +127,9 @@ function Registern() {
               value={cred.name}
               onChange={handleChange}
             />
-            <FaUser className="ic"/>
-        </div>
-        <div className="input-box">
+            <FaUser className="ic" />
+          </div>
+          <div className="input-box">
             <input
               type="email"
               placeholder="Email"
@@ -142,9 +138,9 @@ function Registern() {
               required
               onChange={handleChange}
             />
-            <MdEmail className="ic"/>
-        </div>
-        <div className="input-box">
+            <MdEmail className="ic" />
+          </div>
+          <div className="input-box">
             <input
               type="password"
               placeholder="Password"
@@ -152,9 +148,9 @@ function Registern() {
               value={cred.password}
               onChange={handleChange}
             />
-            <FaLock className="ic"/>
-        </div>
-        <div className="input-box">
+            <FaLock className="ic" />
+          </div>
+          <div className="input-box">
             <input
               type="password"
               placeholder="Confirm Password"
@@ -162,40 +158,42 @@ function Registern() {
               value={cred.cpassword}
               onChange={handleChange}
             />
-            <FaLock className="ic"/>
-        </div>
-        <button type="submit">Get Started</button>
-        <div className="login-link">
-          <p>Already have an account?<Link to="/login">Login</Link></p>
-        </div>
-      </form>
+            <FaLock className="ic" />
+          </div>
+          <button type="submit">Get Started</button>
+          <div className="login-link">
+            <p>
+              Already have an account?<Link to="/login">Login</Link>
+            </p>
+          </div>
+        </form>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Otp Verification</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="eotp">
-              <Form.Label>6 DIGITS OTP </Form.Label>
-              <Form.Control
-                type="Text"
-                placeholder="Enter your otp"
-                autoFocus
-                onChange={handleOtpChange}
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Submit Otp
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Otp Verification</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group className="mb-3" controlId="eotp">
+                <Form.Label>6 DIGITS OTP </Form.Label>
+                <Form.Control
+                  type="Text"
+                  placeholder="Enter your otp"
+                  autoFocus
+                  onChange={handleOtpChange}
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleClose}>
+              Submit Otp
+            </Button>
+          </Modal.Footer>
+        </Modal>
 
-      <ToastContainer />
-    </div>
+        <ToastContainer />
+      </div>
     </div>
   );
 }
