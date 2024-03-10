@@ -6,7 +6,6 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 export default function Allevents() {
   const [curUser, setUser] = useState([]);
   const [myEvents, setEvents] = useState([]);
@@ -122,7 +121,7 @@ export default function Allevents() {
   // Modal to add event
   const handleAdd = async () => {
     try {
-      let { data } = await axios.post("http://localhost:5000/ngo/addevent", {
+      let { data } = await axios.post(`${import.meta.env.VITE_URL}`, {
         email: cred.email,
         name: cred.name,
         description: cred.description,
