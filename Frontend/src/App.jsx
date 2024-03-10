@@ -11,10 +11,6 @@ import Allevents from "./pages/ngoevents/Allevents";
 import Home from "./pages/Home/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-if (import.meta.env.MODE == "development") {
-  axios.defaults("https://");
-}
-
 function App() {
   return (
     <div>
@@ -32,10 +28,12 @@ function App() {
     </div>
   );
 }
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
+
 export default App;
