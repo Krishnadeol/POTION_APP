@@ -1,7 +1,10 @@
+// handle validation not working for add email
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
+import { Card } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { ToastContainer, toast } from "react-toastify";
@@ -29,37 +32,35 @@ export default function Allevents() {
     theme: "dark",
   };
 
-  // for applicants of a particular events
+  const [showApp, setshowApp] = useState(false);
 
-  // const [showApp, setshowApp] = useState(false);
-
-  // const handleCloseApp = () => {
-  //   setshowApp(false);
-  // };
-
-  const [appUser, setappUser] = useState([]);
-  const handleShowApp = async (id) => {
-    try {
-      const { data } = await axios.get("http://localhost:5000/ngo/findusers", {
-        eid: id,
-      });
-      console.log(data);
-
-      if (data.success) {
-        setappUser(data.data);
-        console.log("users applied", appUser);
-      } else {
-        toast.error("Some Error occured ", tobj);
-      }
-    } catch (error) {
-      toast.error("Some sever erorr", tobj);
-    }
+  const handleCloseApp = () => {
+    setshowApp(false);
   };
 
+  const [appUser, setappUser] = useState([]);
+
+  const handleShowApp = async (event) => {
+    try {
+      setcred({ ...cred, name: event.name });
+      let { data } = await axios.get(
+        `http://localhost:5000/ngo/findusers?eid=${event._id}`
+      );
+      console.log(event._id);
+      if (data.success) {
+        setappUser(data.data);
+        console.log("Applicants", appUser);
+        setshowApp(true);
+      } else {
+        toast.error("Some Error occurred", tobj);
+      }
+    } catch (error) {
+      toast.error("Some server error", tobj);
+    }
+  };
   // for editing an event
 
   const [showE, setShowE] = useState(false);
-
   const handleShowE = (event) => {
     setcred([]);
     setcred({ ...cred, ...event });
@@ -73,7 +74,7 @@ export default function Allevents() {
 
   const handleEdit = async () => {
     try {
-      if (handleValidA) {
+      if (handleValidA()) {
         const { data } = await axios.patch(
           `http://localhost:5000/ngo/updateevent?eid=${eventId}`,
           {
@@ -113,6 +114,7 @@ export default function Allevents() {
       const { data } = await axios.delete(
         `http://localhost:5000/ngo/deleteevent/${eventId}`
       );
+
       if (data.success) toast.success("Event deleted successfully", tobj);
       else toast.error("Event deleted successfully", tobj);
     } catch (error) {
@@ -130,28 +132,42 @@ export default function Allevents() {
   const handleA = () => {
     if (handleValidA()) {
       cred.email = curUser.email;
-      console.log(cred);
       handleAdd();
       setShowA(false);
-    } else return;
+    } else {
+      alert("ok");
+      return;
+    }
+  };
+
+  // for setting the all the cred values to empty string
+  const resetCred = () => {
+    const emptyCred = Object.fromEntries(
+      Object.entries(cred).map(([key, _]) => [key, ""])
+    );
+    setcred(emptyCred);
   };
 
   const handleShowA = () => {
-    setcred([]);
+    resetCred();
+    setcred({ ...cred, email: curUser.email });
+    console.log(cred);
     setShowA(true);
   };
 
   const handleValidA = () => {
     if (
-      cred.email === "" ||
-      cred.name === "" ||
-      cred.startDate === "" ||
-      cred.endDate === "" ||
+      cred.email == "" ||
+      cred.name == "" ||
+      cred.startDate == "" ||
+      cred.endDate == "" ||
       cred.description.length < 4
     ) {
       toast.error("Fields cannot be left blank", tobj);
       return false;
-    } else return true;
+    } else {
+      return true;
+    }
   };
 
   // Modal to add event
@@ -169,6 +185,7 @@ export default function Allevents() {
 
       if (data.success) {
         toast.success("Event added successfully ", tobj);
+        window.location.reload();
       } else {
         toast.error(" Server error", tobj);
         alert("not sending the request");
@@ -224,7 +241,7 @@ export default function Allevents() {
 
         <button
           onClick={() => {
-            handleShowApp(event._id);
+            handleShowApp(event);
           }}
         >
           {" "}
@@ -254,8 +271,22 @@ export default function Allevents() {
   }
 
   // APPLICANTS TO APPEAR OM MODALS
-  const findApplicants = async () => {};
-
+  const getApplicants = () => {
+    const applicants = appUser.map((applicant) => (
+      <Card
+        key={applicant._id}
+        style={{ width: "90%", maxWidth: "29rem", marginBottom: "20px" }}
+      >
+        <Card.Body>
+          <Card.Title>{applicant.name}</Card.Title>
+          <Card.Text>Email: {applicant.email}</Card.Text>
+          <Button variant="success">Accept</Button>
+          <Button variant="danger">Reject</Button>
+        </Card.Body>
+      </Card>
+    ));
+    return applicants;
+  };
   return (
     <>
       <></>
@@ -442,6 +473,21 @@ export default function Allevents() {
         <Modal.Footer>
           <Button variant="primary" onClick={handleEdit}>
             Edit event
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* Modal for Applicatns*/}
+      <Modal show={showApp} onHide={handleCloseApp}>
+        <Modal.Header closeButton>
+          <Modal.Title>Applicants for {cred.name} </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {/*mapping function for showing applicants who applied*/}
+          {getApplicants()}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleCloseApp}>
+            Close
           </Button>
         </Modal.Footer>
       </Modal>
