@@ -29,6 +29,7 @@ const AppliedSchema = new Schema({
   date: {
     type: Date,
     default: Date.now,
+    unique: true,
   },
 });
 

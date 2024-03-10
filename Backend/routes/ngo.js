@@ -256,7 +256,7 @@ router.delete("/deleteevent/:_id", async (req, res) => {
 // find Users who applied for the an event
 router.get("/findusers", async (req, res) => {
   try {
-    const data = await Applied.find({ Eid: req.body.eid });
+    const data = await Applied.find({ Eid: req.query.eid });
     let success = true;
     res.json({ success, data });
   } catch (error) {
