@@ -22,9 +22,9 @@ const WhatWeDo = () => {
 
                 {/* right side */}
                 <div className="flexColStart v-right">
-                    <span className="tt">Glimpse of</span>
-                    <span className="primaryText">What We Do</span>
-                    <span className="secondaryText">
+                    <span className="glimpse">Glimpse of</span>
+                    <span className="primaryText weDo">What We Do</span>
+                    <span className="secondaryText weDo-para">
                     Empower communities by promoting food security and sustainability.
                     <br/>
                     Experience the transformative power of fresh food.

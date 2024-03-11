@@ -54,7 +54,7 @@ function Registern() {
 
       if (data.success) {
         localStorage.setItem("crowd-app-ngo-data", JSON.stringify(data.user));
-        navigate("/login");
+        navigate("/ngo_events");
       } else if (!data.success) {
         toast.error(data.error, tobj);
       }

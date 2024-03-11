@@ -21,7 +21,21 @@ const Footer = () => {
             </div>
 
             <div className="flexColStart f-right">
-                <span className="primaryText">Information</span>
+                <span className="primaryText">
+                    <ul className="info-list">
+                        <li>I</li>
+                        <li>n</li>
+                        <li>f</li>
+                        <li>o</li>
+                        <li>r</li>
+                        <li>m</li>
+                        <li>a</li>
+                        <li>t</li>
+                        <li>i</li>
+                        <li>o</li>
+                        <li>n</li>
+                    </ul>
+                </span>
                 <span className="secondaryText">Netaji Subhash Palace, New Delhi</span>
                 <div className="flexCenter f-menu">
                     <a href="" className="nav">Programs</a>

@@ -1,20 +1,58 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Link} from "react-router-dom";
 import { IoIosClose } from "react-icons/io";
 import { BiSolidBuildingHouse } from "react-icons/bi";
 import {FaUser, FaStore} from "react-icons/fa";
-import signUp from "../signUp/signUp"
 import "./Modal.css";
 
 const Modal = ({onClose}) => {
 
+    useEffect(() => {
+      const sign_up_btn = document.querySelector("#sign-up-btn");
+      const sign_in_btn = document.querySelector("#sign-in-btn");
+      const container = document.querySelector(".container");
+      const sign_up_btn2 = document.querySelector("#sign-up-btn2");
+      const sign_in_btn2 = document.querySelector("#sign-in-btn2");
+  
+      const handleSignUpClick = () => {
+        container.classList.add("sign-up-mode");
+      };
+  
+      const handleSignInClick = () => {
+        container.classList.remove("sign-up-mode");
+      };
+  
+      const handleSignUpClick2 = () => {
+        container.classList.add("sign-up-mode2");
+      };
+  
+      const handleSignInClick2 = () => {
+        container.classList.remove("sign-up-mode2");
+      };
+  
+      sign_up_btn.addEventListener("click", handleSignUpClick);
+      sign_in_btn.addEventListener("click", handleSignInClick);
+      sign_up_btn2.addEventListener("click", handleSignUpClick2);
+      sign_in_btn2.addEventListener("click", handleSignInClick2);
+  
+      return () => {
+        sign_up_btn.removeEventListener("click", handleSignUpClick);
+        sign_in_btn.removeEventListener("click", handleSignInClick);
+        sign_up_btn2.removeEventListener("click", handleSignUpClick2);
+        sign_in_btn2.removeEventListener("click", handleSignInClick2);
+      };
+    }, []);
+
     return (
-        <div className="Modal">
-            <div className="popUp">
+        <>
+        
+        <div className="modal-wrapper"></div>
+        <div className="popUp">
 
                 <button onClick={onClose} className='cross'><IoIosClose size={30}/></button>
-
+             
                 <div className="container">
+
                     <div className="signin-signup">
 
                         <form action="" className="sign-in-form">
@@ -22,24 +60,25 @@ const Modal = ({onClose}) => {
   
                             {/*Individal*/}
                             <div className="input-field">
-                              <FaUser className="i" />
-                              <input type="radio" className="signIn" value="USER" id="signIn"/>
-                              <label htmlFor="User">User</label>
+                              <input type="radio" name="signIn" value="USER" className="login-user"/>
+                              <label htmlFor="User">Individual</label>
+                              <FaUser className="ic login-icon" />
                             </div>
                             {/*NGO*/}
                             <div className="input-field">
-                              <BiSolidBuildingHouse className="i" /> 
-                              <input type="radio" className="signIn" value="NGO" id="signIn"/>
-                              <label htmlFor="Ngo">ngo</label>
+                              <input type="radio" name="signIn" value="NGO" className="login-ngo"/>
+                              <label htmlFor="Ngo">Non Govt. Organization</label>
+                              <BiSolidBuildingHouse className="ic login-icon" /> 
                             </div>
                             {/*StoreOwner*/}
                             <div className="input-field">
-                              <FaStore className="i" />
-                              <input type="radio" className="signIn" value="STORE" id="signIn"/>
+                              <input type="radio" name="signIn" value="STORE" className="login-store"/>
                               <label for="Store">StoreOwner</label>
+                              <FaStore className="ic login-icon" />
                             </div>
 
-                            <input type="submit" value="Login" className="btn" />
+                            <input type="submit" value="Login" className="button" />
+                            {/*<button className="button">LogIn</button>*/}
                             <p className="account-text">Don't have an account?<a href="#" id="sign-up-btn2">Sign up</a></p>
                         </form>
 
@@ -48,49 +87,62 @@ const Modal = ({onClose}) => {
 
                             {/*Individual*/}
                             <div className="input-field">
-                              <FaUser className="i" />
-                              <input type="text" placeholder="Username" />
+                              <input type="radio" name="signUp" value="USER" className="register-ngo"/>
+                              <label htmlFor="User">Individual</label>
+                              <BiSolidBuildingHouse className="ic register-icon" /> 
                             </div>
                             {/*NGO*/}
                             <div className="input-field">
-                              <BiSolidBuildingHouse className="i" /> 
-                              <input type="text" placeholder="Email" />
+                              <input type="radio" name="signUp" value="NGO" className="register-ngo"/>
+                              <label htmlFor="Ngo">Non Govt. Organization</label>
+                              <BiSolidBuildingHouse className="ic register-icon" /> 
                             </div>
                             {/*StoreOwner*/}
                             <div className="input-field">
-                              <FaStore className="i" />
-                              <input type="password" placeholder="Password" />
+                              <input type="radio" name="signUp" value="STORE" className="register-store"/>
+                              <label for="Store">StoreOwner</label>
+                              <FaStore className="ic register-icon" />
                             </div>
-                            <input type="submit" value="Sign up" className="btn" />
-                
+
+                            <input type="submit" value="Sign up" className="button" />
+                            {/*<button className="button">SignUp</button>*/}
                             <p className="account-text">Already have an account? <a href="#" id="sign-in-btn2">Sign in</a></p>
                         </form>
 
                     </div>
+
+
                     <div className="panels-container">
+
                         <div className="panel left-panel">
                             <div className="content">
-                              <h3>Member of Brand?</h3>
-                              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque accusantium dolor, eos incidunt minima iure?</p>
-                              <button className="btn" id="sign-in-btn">Sign in</button>
+                              <h3>Already joined?</h3>
+                              <p>Your compassion fuels our mission, turning hunger into hope. Thank you for lighting up lives with your generosity.</p>
+                              <button className="button" id="sign-in-btn">Sign in</button>
                             </div>
+                            <br/>
                             <img src="Iskcon.png" alt="" class="image" />
                         </div>
+
                         <div className="panel right-panel">
                             <div className="content">
-                              <h3>New to Brand?</h3>
-                              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque accusantium dolor, eos incidunt minima iure?</p>
-                              <button className="btn" id="sign-up-btn">Sign up</button>
+                              <h3>Haven't joined Yet?</h3>
+                              <p>Join us in feeding hope and nourishing hearts. Your kindness can fill empty stomachs and bring smiles that last.</p>
+                              <button className="button" id="sign-up-btn">SignUp</button>
                             </div>
+                            <br/>
                             <img src="PMPOSHAN.png" alt="" className="image" />
                         </div>
-                    </div>
+
+                    </div> 
+
                 </div>
 
-
-            </div>
         </div>
-    )
-}
+
+        </>
+    );
+};
 
 export default Modal;
+
