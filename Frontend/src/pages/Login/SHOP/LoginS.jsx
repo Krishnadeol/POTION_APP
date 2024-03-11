@@ -8,12 +8,13 @@ import transition from "../../../transition";
 import video from "../../../../public/Zero Hunger Film _ Global Goals.mp4";
 import axios from "axios";
 
-function LoginI() {
+function LoginS() {
   const navigate = useNavigate();
   const [cred, setCred] = useState({
     email: "",
     password: "",
   });
+
   const tobj = {
     position: "bottom-right",
     autoclose: 5000,
@@ -21,7 +22,7 @@ function LoginI() {
     draggable: true,
   };
   useEffect(() => {
-    if (localStorage.getItem("crowd-app-ind-data")) {
+    if (localStorage.getItem("crowd-app-ngo-data")) {       /* crowd-app-shop-data */
       navigate("/");
     }
   }, [navigate]);
@@ -31,14 +32,19 @@ function LoginI() {
 
     if (handleValidation) {
       try {
-        const { data } = await axios.post("http://localhost:5000/user/login", {
+        const { data } = await axios.post("http://localhost:5000/ngo/login", {     /* localhost:5000/shop/login */
           email: cred.email,
           pass: cred.password,
         });
 
         if (data.success) {
-          localStorage.setItem("crowd-app-ind-data", JSON.stringify(data.user));
-          navigate("/");
+          localStorage.setItem(
+            "crowd-app-ngo-data",
+            JSON.stringify(data.userWithoutPassword)
+          );
+          alert("logged in");
+          console.log(data.userWithoutPassword);
+          navigate("/ngo_events");
         } else if (!data.success) {
           toast.error(data.error, tobj);
         }
@@ -68,7 +74,7 @@ function LoginI() {
 
   return (
     <>
-    <div className="bgContainer">
+      <div className="bgContainer">
         <div className="overlay">
           <video className="vid" src={video} autoPlay={true} loop />
           <div className="bd">
@@ -101,7 +107,7 @@ function LoginI() {
               <div className="register-link">
                 <p>
                   Already have an account?
-                  <Link to="/ind_register"> SignUp</Link>
+                  <Link to="/shop_register"> SignUp</Link>
                 </p>
               </div>
             </form>
@@ -112,4 +118,4 @@ function LoginI() {
     </>
   );
 }
-export default transition(LoginI);
+export default transition(LoginS);

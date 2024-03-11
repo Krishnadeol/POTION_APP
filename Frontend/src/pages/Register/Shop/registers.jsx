@@ -3,8 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { FaUser, FaLock } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import transition from "../../../transition";
+import video from "../../../../public/Zero Hunger Film _ Global Goals.mp4";
+import "./shopr.css"
 
-function Registern() {
+
+function RegisterS() {
   const navigate = useNavigate();
   const [cred, setCred] = useState({
     name: "",
@@ -69,52 +75,66 @@ function Registern() {
   };
 
   return (
-    <>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div className="brand">
-          <h1>Welcome to our App</h1>
+    <div className="bgContainer">
+      <div className="overlay">
+        <video className="vid" src={video} autoPlay={true} loop />
+        <div className="bd">
+          <form className="wrapper" onSubmit={(e) => handleSubmit(e)}>
+            <h1>Sign UP</h1>
+
+            <div className="input-box">
+              <input
+                type="text"
+                placeholder="Username"
+                name="name"
+                value={cred.name}
+                onChange={handleChange}
+              />
+              <FaUser className="ic" />
+            </div>
+            <div className="input-box">
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                value={cred.email}
+                required
+                onChange={handleChange}
+              />
+              <MdEmail className="ic" />
+            </div>
+            <div className="input-box">
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={cred.password}
+                onChange={handleChange}
+              />
+              <FaLock className="ic" />
+            </div>
+            <div className="input-box">
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                name="cpassword"
+                value={cred.cpassword}
+                onChange={handleChange}
+              />
+              <FaLock className="ic" />
+            </div>
+            <button type="submit">Get Started</button>
+            <div className="login-link">
+              <p>
+                Already have an account?<Link to="/shop_login"> SignIn</Link>
+              </p>
+            </div>
+          </form>
+          <ToastContainer />
         </div>
-
-        <input
-          type="text"
-          placeholder="Username"
-          name="name"
-          value={cred.name}
-          onChange={handleChange}
-        />
-
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          value={cred.email}
-          required
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={cred.password}
-          onChange={handleChange}
-        />
-
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          name="cpassword"
-          value={cred.cpassword}
-          onChange={handleChange}
-        />
-
-        <button type="submit">Create User</button>
-        <span>
-          already have an account ?<Link to="/login">Login</Link>
-        </span>
-      </form>
-      <ToastContainer />
-    </>
+      </div>
+   </div>
   );
 }
 
-export default Registern;
+export default transition(RegisterS);

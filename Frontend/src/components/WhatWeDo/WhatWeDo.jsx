@@ -10,7 +10,7 @@ import data from "../../utils/accordion.jsx";
 const WhatWeDo = () => {
 
     return (
-        <section className="v-wrapper back">
+        <section className="v-wrapper back" id="about-us">
             <div className="paddings innerWidth flexCenter v-container">
 
                 {/* left side */}

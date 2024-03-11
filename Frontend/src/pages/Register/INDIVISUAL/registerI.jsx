@@ -6,6 +6,12 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import { FaUser, FaLock } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import transition from "../../../transition";
+import video from "../../../../public/Zero Hunger Film _ Global Goals.mp4";
+import "./indivisualr.css"
+
 
 function RegisterI() {
   const navigate = useNavigate();
@@ -112,71 +118,61 @@ function RegisterI() {
   };
 
   return (
-    <>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div className="brand">
-          <h1>Welcome to our App</h1>
-        </div>
+    <div className="bgContainer">
+      <div className="overlay">
+        <video className="vid" src={video} autoPlay={true} loop />
+        <div className="bd">
+          <form className="wrapper" onSubmit={(e) => handleSubmit(e)}>
+            <h1>Sign UP</h1>
 
-        <input
-          type="text"
-          placeholder="Username"
-          name="name"
-          value={cred.name}
-          onChange={handleChange}
-        />
-
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          value={cred.email}
-          required
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={cred.password}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          name="cpassword"
-          value={cred.cpassword}
-          onChange={handleChange}
-        />
-        <br />
-
-        <input
-          type="radio"
-          id="I"
-          name="category"
-          value="Indivisual"
-          onChange={handleChange}
-        />
-
-        <label htmlFor="I">Indivisual</label>
-
-        <input
-          type="radio"
-          id="O"
-          name="category"
-          value="Organisation"
-          onChange={handleChange}
-        />
-
-        <label htmlFor="O">Organisation</label>
-
-        <br />
-
-        <button type="submit">Create User</button>
-        <span>
-          already have an account ?<Link to="/login">Login</Link>
-        </span>
-      </form>
+            <div className="input-box">
+              <input
+                type="text"
+                placeholder="Username"
+                name="name"
+                value={cred.name}
+                onChange={handleChange}
+              />
+              <FaUser className="ic" />
+            </div>
+            <div className="input-box">
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                value={cred.email}
+                required
+                onChange={handleChange}
+              />
+              <MdEmail className="ic" />
+            </div>
+            <div className="input-box">
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={cred.password}
+                onChange={handleChange}
+              />
+              <FaLock className="ic" />
+            </div>
+            <div className="input-box">
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                name="cpassword"
+                value={cred.cpassword}
+                onChange={handleChange}
+              />
+              <FaLock className="ic" />
+            </div>
+            <button type="submit">Get Started</button>
+            <div className="login-link">
+              <p>
+                Already have an account?<Link to="/ind_login"> SignIn</Link>
+              </p>
+            </div>
+          </form>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -202,7 +198,9 @@ function RegisterI() {
         </Modal.Footer>
       </Modal>
       <ToastContainer />
-    </>
+      </div>
+    </div>
+  </div>
   );
 }
-export default RegisterI;
+export default transition(RegisterI);
