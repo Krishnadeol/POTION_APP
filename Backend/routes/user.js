@@ -149,14 +149,24 @@ router.post("/apply", async (req, res) => {
     let success = false;
     // checking if the user has already applied for the event .
 
-    const check = await Applied.find({ Eid: req.body.eid });
+    let e = req.body.email;
+    let eid = req.body.Eid;
 
+    const check = await Applied.findOne({
+      Eid: eid,
+      email: e,
+    });
+    if (check) {
+      return res
+        .status(400)
+        .json({ success, error: "You have already applied for the event" });
+    }
     let event = await Applied.create({
       name: req.body.name,
       email: req.body.email,
       message: req.body.message,
       Resume: req.body.resume,
-      Eid: req.body.eid,
+      Eid: req.body.Eid,
     });
 
     const data = {
@@ -177,7 +187,7 @@ router.post("/apply", async (req, res) => {
 
 router.get("/findmyevents", async (req, res) => {
   try {
-    const data = await Applied.find({ email: req.body.email });
+    const data = await Applied.find({ email: req.query.email });
     const events = [];
 
     for (let i = 0; i < data.length; i++) {

@@ -1,5 +1,3 @@
-// handle validation not working for add email
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -9,7 +7,8 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export default function Allevents() {
+
+export default function Campaigns() {
   const [curUser, setUser] = useState([]);
   const [myEvents, setEvents] = useState([]);
   const [eventId, setId] = useState("");
@@ -17,11 +16,7 @@ export default function Allevents() {
     name: "",
     email: "",
     description: "",
-    startDate: "",
-    endDate: "",
-    stipend: 0,
-    tag: "",
-    opportunity: "",
+    target: 0,
   });
 
   const tobj = {
@@ -32,33 +27,7 @@ export default function Allevents() {
     theme: "dark",
   };
 
-  const [showApp, setshowApp] = useState(false);
-
-  const handleCloseApp = () => {
-    setshowApp(false);
-  };
-
-  const [appUser, setappUser] = useState([]);
-
-  const handleShowApp = async (event) => {
-    try {
-      setcred({ ...cred, name: event.name });
-      let { data } = await axios.get(
-        `http://localhost:5000/ngo/findusers?eid=${event._id}`
-      );
-      console.log(event._id);
-      if (data.success) {
-        setappUser(data.data);
-        console.log("Applicants", appUser);
-        setshowApp(true);
-      } else {
-        toast.error("Some Error occurred", tobj);
-      }
-    } catch (error) {
-      toast.error("Some server error", tobj);
-    }
-  };
-  // for editing an event
+  // for editing an campaign
 
   const [showE, setShowE] = useState(false);
   const handleShowE = (event) => {
@@ -76,19 +45,16 @@ export default function Allevents() {
     try {
       if (handleValidA()) {
         const { data } = await axios.patch(
-          `http://localhost:5000/ngo/updateevent?eid=${eventId}`,
+          `http://localhost:5000/ngo/updatecampaign?eid=${eventId}`,
           {
             email: cred.email,
             name: cred.name,
             description: cred.description,
-            startDate: cred.startDate,
-            stipend: cred.stipend,
-            endDate: cred.endDate,
-            oppportunity: cred.opportunity,
+            target: cred.target,
           }
         );
         if (data.success) {
-          toast.success("Event updated successfully", tobj);
+          toast.success("campaign updated successfully", tobj);
           handleCloseE;
         } else {
           toast.error("Could not update ! try after some time", tobj);
@@ -112,17 +78,17 @@ export default function Allevents() {
     try {
       handleCloseD();
       const { data } = await axios.delete(
-        `http://localhost:5000/ngo/deleteevent/${eventId}`
+        `http://localhost:5000/ngo/deletecampaign/${eventId}`
       );
 
       if (data.success) toast.success("Event deleted successfully", tobj);
-      else toast.error("Event deleted successfully", tobj);
+      else toast.error("Not successfull successfull", tobj);
     } catch (error) {
       toast.error(error.message, tobj);
     }
   };
 
-  // For  adding an event
+  // For  adding an campaign
 
   const [showA, setShowA] = useState(false);
   const handleCloseA = () => {
@@ -157,10 +123,9 @@ export default function Allevents() {
 
   const handleValidA = () => {
     if (
-      cred.email == "" ||
-      cred.name == "" ||
-      cred.startDate == "" ||
-      cred.endDate == "" ||
+      cred.email === "" ||
+      cred.name === "" ||
+      cred.target === "" ||
       cred.description.length < 4
     ) {
       toast.error("Fields cannot be left blank", tobj);
@@ -177,10 +142,7 @@ export default function Allevents() {
         email: cred.email,
         name: cred.name,
         description: cred.description,
-        startDate: cred.startDate,
-        stipend: cred.stipend,
-        endDate: cred.endDate,
-        oppportunity: cred.opportunity,
+        target: cred.target,
       });
 
       if (data.success) {
@@ -221,7 +183,7 @@ export default function Allevents() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/ngo/getevents?email=${curUser.email}`
+          `http://localhost:5000/ngo/getcampaigns`
         );
 
         setEvents(data.data);
@@ -234,68 +196,51 @@ export default function Allevents() {
     fetchData();
   }, [curUser]);
 
-  function getEvents() {
+  function getCampaigns() {
     const cards = myEvents.map((event) => (
-      <li key={event._id}>
-        <h1>{event.name}</h1>
-
-        <button
-          onClick={() => {
-            handleShowApp(event);
-          }}
-        >
-          {" "}
-          Show Applicants
-        </button>
-
-        <button
-          onClick={() => {
-            handleShowE(event);
-          }}
-        >
-          {" "}
-          Edit
-        </button>
-
-        {/* The refrence passing in the button */}
-        <button
-          onClick={() => {
-            handleShowD(event._id);
-          }}
-        >
-          Delete
-        </button>
-      </li>
-    ));
-    return cards;
-  }
-
-  // APPLICANTS TO APPEAR OM MODALS
-  const getApplicants = () => {
-    const applicants = appUser.map((applicant) => (
       <Card
-        key={applicant._id}
+        key={event._id}
         style={{ width: "90%", maxWidth: "29rem", marginBottom: "20px" }}
       >
         <Card.Body>
-          <Card.Title>{applicant.name}</Card.Title>
-          <Card.Text>Email: {applicant.email}</Card.Text>
-          <Button variant="success">Accept</Button>
-          <Button variant="danger">Reject</Button>
+          <Card.Title>{event.name}</Card.Title>
+          <Card.Text>Email: {event.email}</Card.Text>
+          {curUser.email === event.email && (
+            <Button
+              variant="primary"
+              onClick={() => {
+                handleShowE(event);
+              }}
+            >
+              Update
+            </Button>
+          )}
+
+          {curUser.email === event.email && (
+            <Button
+              variant="primary"
+              onClick={() => {
+                handleShowD(event._id);
+              }}
+            >
+              Delete
+            </Button>
+          )}
+
+          <Button variant="primary">Donate</Button>
         </Card.Body>
       </Card>
     ));
-    return applicants;
-  };
+    return cards;
+  }
   return (
     <>
-      <></>
-      <h1>events</h1>
+      <h1>Campaigns</h1>
       <Button variant="primary" onClick={handleShowA}>
-        Add an event
+        Add an Campaign
       </Button>
 
-      <ul> {myEvents && getEvents()}</ul>
+      <ul> {myEvents && getCampaigns()}</ul>
       {/*modal for adding an event */}
 
       <Modal show={showA} onHide={handleCloseA}>
@@ -315,43 +260,11 @@ export default function Allevents() {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Opportunity</Form.Label>
+              <Form.Label>Target for campaign</Form.Label>
               <Form.Control
-                type="text"
-                autoFocus
-                name="opportunity"
-                value={cred.opportunity}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Stipend</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Stipend Amount"
-                name="stipend"
-                value={cred.stipend}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Start Date</Form.Label>
-              <Form.Control
-                type="date"
-                name="startDate"
-                value={cred.startDate}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>End Date</Form.Label>
-              <Form.Control
-                type="date"
-                name="endDate"
-                value={cred.endDate}
+                type="Number"
+                name="target"
+                value={cred.target}
                 onChange={handleChange}
               />
             </Form.Group>
@@ -417,43 +330,11 @@ export default function Allevents() {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Opportunity</Form.Label>
+              <Form.Label>Target for campaign</Form.Label>
               <Form.Control
-                type="text"
-                autoFocus
-                name="opportunity"
-                value={cred.opportunity}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Stipend</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Stipend Amount"
-                name="stipend"
-                value={cred.stipend}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Start Date</Form.Label>
-              <Form.Control
-                type="date"
-                name="startDate"
-                value={cred.startDate}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>End Date</Form.Label>
-              <Form.Control
-                type="date"
-                name="endDate"
-                value={cred.endDate}
+                type="Number"
+                name="target"
+                value={cred.target}
                 onChange={handleChange}
               />
             </Form.Group>
@@ -473,21 +354,6 @@ export default function Allevents() {
         <Modal.Footer>
           <Button variant="primary" onClick={handleEdit}>
             Edit event
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      {/* Modal for Applicatns*/}
-      <Modal show={showApp} onHide={handleCloseApp}>
-        <Modal.Header closeButton>
-          <Modal.Title>Applicants for {cred.name} </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {/*mapping function for showing applicants who applied*/}
-          {getApplicants()}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleCloseApp}>
-            Close
           </Button>
         </Modal.Footer>
       </Modal>

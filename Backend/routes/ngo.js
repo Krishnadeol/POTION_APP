@@ -19,7 +19,9 @@ const saltRounds = 10;
 const Ngo = require("../models/NGO");
 const Events = require("../models/EVENTS");
 const Applied = require("../models/UserApplied");
+const Campaign = require("../models/CAMPAIGNS");
 var jwt = require("jsonwebtoken");
+
 const { find } = require("../models/UserApplied");
 //const fetchUser = require('../middleware/fetchUser');
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -256,7 +258,7 @@ router.delete("/deleteevent/:_id", async (req, res) => {
 // find Users who applied for the an event
 router.get("/findusers", async (req, res) => {
   try {
-    const data = await Applied.find({ Eid: req.body.eid });
+    const data = await Applied.find({ Eid: req.query.eid });
     let success = true;
     res.json({ success, data });
   } catch (error) {
@@ -279,4 +281,94 @@ router.post("/application", async (req, res) => {
 
 // rate users work and give remarks for users.
 
+// add a campaign
+
+router.post(
+  "/addcampaign",
+  [
+    // validating the name ,email and password.
+    body("email", "Enter a valid Email").isEmail(),
+    body("name", "Name of the event not included").exists(),
+    body(
+      "description",
+      "Discription of the event not be less than 5 characters"
+    ).isLength({ min: 5 }),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    let success = false;
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ success, errors: errors.array() });
+    }
+
+    try {
+      let event = await Campaign.create({
+        name: req.body.name,
+        email: req.body.email,
+        description: req.body.description,
+        target: req.body.target,
+      });
+
+      // This structure is often used to format the response data when sending a response to the client. In this case, data contains information about the newly created event, specifically its id.
+      const data = {
+        event: {
+          id: event.id,
+        },
+      };
+      success = true;
+      console.log(event.id);
+      res.json({ success, data });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).json({ error: error.message });
+    }
+  }
+);
+
+// edit a campaign
+
+router.patch("/updatecampaign", async (req, res) => {
+  const id = req.query.eid; // Get the id from query parameters
+  const updates = req.body; // Get the updates from request body
+
+  //   updatedEvent will contain the document after it has been updated if { new: true } is set.
+  //    If { new: true } is not set, updatedEvent will contain the document as it was before the update operation.
+  try {
+    const response = await Campaign.findByIdAndUpdate(id, updates, {
+      new: true,
+    });
+    let success = true;
+    res.status(200).json({ success, response });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// delete an event
+
+router.delete("/deletecampaign/:_id", async (req, res) => {
+  try {
+    let id = req.params._id;
+    let del = await Campaign.findByIdAndDelete(id);
+    let success = false;
+    if (!del) {
+      return res.status(404).json({ success, error: "Campaign not found" });
+    }
+    success = true;
+    res.json({ success, deletedEvent: del });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// get all campaigns
+router.get("/getcampaigns", async (req, res) => {
+  try {
+    const data = await Campaign.find();
+    let success = true;
+    res.json({ success, data });
+  } catch (error) {
+    res.json({ error: error.message });
+  }
+});
 module.exports = router;
