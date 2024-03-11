@@ -89,7 +89,7 @@ const Modal = ({onClose}) => {
                             <div className="input-field">
                               <input type="radio" name="signUp" value="USER" className="register-ngo"/>
                               <label htmlFor="User">Individual</label>
-                              <BiSolidBuildingHouse className="ic register-icon" /> 
+                              <FaUser className="ic login-icon" />
                             </div>
                             {/*NGO*/}
                             <div className="input-field">
@@ -121,7 +121,7 @@ const Modal = ({onClose}) => {
                               <button className="button" id="sign-in-btn">Sign in</button>
                             </div>
                             <br/>
-                            <img src="Iskcon.png" alt="" class="image" />
+                            <img src="FoodSignIn.png" alt="" class="image" />
                         </div>
 
                         <div className="panel right-panel">
@@ -131,7 +131,7 @@ const Modal = ({onClose}) => {
                               <button className="button" id="sign-up-btn">SignUp</button>
                             </div>
                             <br/>
-                            <img src="PMPOSHAN.png" alt="" className="image" />
+                            <img src="FoodSignUp.png" alt="" className="image" />
                         </div>
 
                     </div> 
