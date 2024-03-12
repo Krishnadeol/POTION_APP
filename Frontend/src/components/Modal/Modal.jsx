@@ -1,11 +1,38 @@
 import React, {useEffect} from 'react'
-import {Link} from "react-router-dom";
+import {useState} from 'react'
+
 import { IoIosClose } from "react-icons/io";
 import { BiSolidBuildingHouse } from "react-icons/bi";
 import {FaUser, FaStore} from "react-icons/fa";
 import "./Modal.css";
 
 const Modal = ({onClose}) => {
+    
+    const [signInValue, setSignInValue] = useState('');
+    const [signUpValue, setSignUpValue] = useState('');
+
+    const handleSignInSubmit = (e) => {
+        e.preventDefault();
+        if (signInValue === '0') {
+            window.location.href = '/ind_login';
+        } else if (signInValue === '1') {
+            window.location.href = '/ngo_login';
+        } else if (signInValue === '2') {
+            window.location.href = '/shop_login';
+        }
+    };
+
+    const handleSignUpSubmit = (f) => {
+        f.preventDefault();
+        if (signUpValue === '3') {
+            window.location.href = '/ind_register';
+        } else if (signUpValue === '4') {
+            window.location.href = '/ngo_register';
+        } else if (signUpValue === '5') {
+            window.location.href = '/shop_register';
+        }
+    };
+
 
     useEffect(() => {
       const sign_up_btn = document.querySelector("#sign-up-btn");
@@ -55,24 +82,24 @@ const Modal = ({onClose}) => {
 
                     <div className="signin-signup">
 
-                        <form action="" className="sign-in-form">
+                        <form id="my-form" className="sign-in-form" onSubmit={handleSignInSubmit} >
                             <h2 className="title">Sign in</h2>
   
                             {/*Individal*/}
                             <div className="input-field">
-                              <input type="radio" name="signIn" value="USER" className="login-user"/>
+                              <input type="radio" name="signIn" value="0" className="login-user" onChange={(e) => setSignInValue(e.target.value)} />
                               <label htmlFor="User">Individual</label>
                               <FaUser className="ic login-icon" />
                             </div>
                             {/*NGO*/}
                             <div className="input-field">
-                              <input type="radio" name="signIn" value="NGO" className="login-ngo"/>
+                              <input type="radio" name="signIn" value="1" className="login-ngo" onChange={(e) => setSignInValue(e.target.value)} />
                               <label htmlFor="Ngo">Non Govt. Organization</label>
                               <BiSolidBuildingHouse className="ic login-icon" /> 
                             </div>
                             {/*StoreOwner*/}
                             <div className="input-field">
-                              <input type="radio" name="signIn" value="STORE" className="login-store"/>
+                              <input type="radio" name="signIn" value="2" className="login-store" onChange={(e) => setSignInValue(e.target.value)} />
                               <label for="Store">StoreOwner</label>
                               <FaStore className="ic login-icon" />
                             </div>
@@ -82,24 +109,24 @@ const Modal = ({onClose}) => {
                             <p className="account-text">Don't have an account?<a href="#" id="sign-up-btn2">Sign up</a></p>
                         </form>
 
-                        <form action="" className="sign-up-form">
+                        <form className="sign-up-form" onSubmit={handleSignUpSubmit}>
                             <h2 className="title">Sign up</h2>
 
                             {/*Individual*/}
                             <div className="input-field">
-                              <input type="radio" name="signUp" value="USER" className="register-ngo"/>
+                              <input type="radio" name="signUp" value="3" className="register-ngo" onChange={(f) => setSignUpValue(f.target.value)} />
                               <label htmlFor="User">Individual</label>
                               <FaUser className="ic login-icon" />
                             </div>
                             {/*NGO*/}
                             <div className="input-field">
-                              <input type="radio" name="signUp" value="NGO" className="register-ngo"/>
+                              <input type="radio" name="signUp" value="4" className="register-ngo" onChange={(f) => setSignUpValue(f.target.value)} />
                               <label htmlFor="Ngo">Non Govt. Organization</label>
                               <BiSolidBuildingHouse className="ic register-icon" /> 
                             </div>
                             {/*StoreOwner*/}
                             <div className="input-field">
-                              <input type="radio" name="signUp" value="STORE" className="register-store"/>
+                              <input type="radio" name="signUp" value="5" className="register-store" onChange={(f) => setSignUpValue(f.target.value)} />
                               <label for="Store">StoreOwner</label>
                               <FaStore className="ic register-icon" />
                             </div>

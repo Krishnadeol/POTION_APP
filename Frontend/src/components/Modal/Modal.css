@@ -235,9 +235,11 @@ a {
     }
     form {
         width: 80%;
+        height: 100%;
     }
     .popUp{
         width: 80%;
+        height: 100%;
     }
     form.sign-up-form {
         display: none;
