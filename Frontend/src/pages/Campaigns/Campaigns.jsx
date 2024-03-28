@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import upiqr from "upiqr";
 export default function Campaigns() {
   const [curUser, setUser] = useState([]);
   const [myEvents, setEvents] = useState([]);
@@ -162,6 +162,53 @@ export default function Campaigns() {
     setcred({ ...cred, [e.target.name]: e.target.value });
   };
 
+  // for handleling the donation  => flow  event se upi id and payee name lao
+  // modal pr amount dal wao click on generate qr button
+  // then if the payment is successfull then update the value in the
+  // donated section  => ye kam do tareeko se ho skta either manually or automatically ( sochna padega :) )
+
+  const [showDo, setShowDo] = useState(false);
+  const handleCloseDo = () => {
+    setShowDo(false);
+  };
+
+  const [donCred, setdonCred] = useState({
+    payee: "",
+    UPI: "",
+  });
+  const handleDonation = async (e) => {
+    try {
+      let email = "d.12a@gmail.com";
+      const { data } = await axios.get(
+        `http://localhost:5000/ngo/upi?email=${email}`,
+        {}
+      );
+      if (data.success) {
+        donCred.UPI = data.data.UPI;
+        donCred.payee = data.data.payee;
+        generateQR();
+      } else toast.error("some network error", tobj);
+    } catch (error) {
+      toast.error(error.message, tobj);
+    }
+  };
+  const [qrImage, setQrImage] = useState(null);
+
+  const generateQR = () => {
+    upiqr({
+      payeeVPA: donCred.UPI,
+      payeeName: donCred.payee,
+    })
+      .then((upi) => {
+        console.log(upi.qr); // data:image/png;base64,eR0lGODP...
+        console.log(upi.intent); // upi://pay?pa=bhar4t@upi&pn=Bharat..
+        setQrImage(upi.qr);
+        setShowDo(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
@@ -205,29 +252,40 @@ export default function Campaigns() {
         <Card.Body>
           <Card.Title>{event.name}</Card.Title>
           <Card.Text>Email: {event.email}</Card.Text>
-          {curUser.email === event.email && (
+          {localStorage.getItem("crowd-app-ngo-data") ? (
             <Button
               variant="primary"
               onClick={() => {
-                handleShowE(event);
+                handleDonation(event);
               }}
             >
-              Update
+              Donate
             </Button>
-          )}
+          ) : (
+            <>
+              {curUser.email === event.email && (
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    handleShowE(event);
+                  }}
+                >
+                  Update
+                </Button>
+              )}
 
-          {curUser.email === event.email && (
-            <Button
-              variant="primary"
-              onClick={() => {
-                handleShowD(event._id);
-              }}
-            >
-              Delete
-            </Button>
+              {curUser.email === event.email && (
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    handleShowD(event._id);
+                  }}
+                >
+                  Delete
+                </Button>
+              )}
+            </>
           )}
-
-          <Button variant="primary">Donate</Button>
         </Card.Body>
       </Card>
     ));
@@ -355,6 +413,29 @@ export default function Campaigns() {
           <Button variant="primary" onClick={handleEdit}>
             Edit event
           </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* Modal for taking donation amount*/}
+
+      <Modal
+        show={showDo}
+        onHide={handleCloseDo}
+        size="md"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Scan the Qr
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {qrImage && (
+            <img src={qrImage} alt="QR Code" style={{ width: "100%" }} />
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleCloseDo}>Close</Button>
         </Modal.Footer>
       </Modal>
       <ToastContainer />
