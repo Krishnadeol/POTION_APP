@@ -8,7 +8,7 @@ import transition from "../../transition"
 
 const Programs = () => {
     return (
-        <section className="r-wrapper">
+        <section className="r-wrapper" id="programs">
             <div className="paddings innerWidth r-container">
 
                 <div className="r-head flexColStart">

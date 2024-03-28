@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {BiMenuAltRight} from 'react-icons/bi'
 import { Link } from "react-router-dom"
 import OutsideClickHandler from "react-outside-click-handler";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 import './Header.css'
 
 const Header = () => {
@@ -21,10 +22,10 @@ const Header = () => {
 
                 <OutsideClickHandler onOutsideClick= { ()=> {setMenuOpened(false)}}>
                 <div className="flexCenter h-menu" style={getMenuStyles(menuOpened)}>
-                    <a href="" className="nav">Programs</a> 
+                    <AnchorLink href="#programs" className="nav">Programs</AnchorLink> 
                     <a href="" className="nav">Blogs</a>
-                    <a href="" className="nav">About us</a>
-                    <a href="" className="nav">Contact us</a>
+                    <AnchorLink href="#about-us" className="nav">About us</AnchorLink>
+                    <AnchorLink href="#contact-us" className="nav">Contact us</AnchorLink>
                     <a href="" className="nav">Donate Now</a>
                     <button className="button but">
                         <a href="" className="but2">Get Food</a>

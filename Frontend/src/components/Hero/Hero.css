@@ -38,6 +38,33 @@
     z-index: -1;
 }
 
+.adj{
+    margin-top: -60px;
+}
+.content{
+    position: relative;
+}
+.content h1{
+    position: absolute;
+}
+.content h1:nth-child(1){
+    color: transparent;
+    -webkit-text-stroke: 2px  #ff922d;
+}
+.content h1:nth-child(2){
+    color: #ff922d;
+    animation: water 4s ease-in-out infinite;
+}
+
+@keyframes water{
+    0%, 100%{
+        clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+    }
+    50%{
+        clip-path: polygon(0 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+    }
+}
+
 .Register{
     background-color: white;
     border-radius: 8px;

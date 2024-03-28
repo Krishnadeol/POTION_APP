@@ -55,11 +55,12 @@
     font-weight: 600;
 }
 
-.tt{
+.glimpse{
     color:#09994f;
     font-size: 1.5rem;
     font-weight: 600;
 }
+
 
 @media (max-width: 1024px){
     .v-container{

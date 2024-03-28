@@ -18,15 +18,14 @@ const Hero = () => {
                 {/* <!-- Left Side --> */}
                 <div className="flexColStart hero-left">
 
-                   <div className="hero-title">
+                   <div className="hero-title adj">
                         <div className="orange-circle"></div>
                         <h1>
-                          Feeding <br />
-                          Hope, Defeating <br /> Hunger
+                          Feeding<br />
+                          Hope, Defeating <br /> <div className="content hero-title"><h1>Hunger</h1><h1>Hunger</h1></div>
                         </h1>
+                        <br/><br/>
                    </div>
-
-                   {showModal && <Modal onClose={() => setShowModal(false)} />}
                     
                    <div className="flexColStart hero-des">
                         <span>Join us in the fight against hunger, providing food for all.</span>
@@ -45,6 +44,7 @@ const Hero = () => {
                             />
                         </div>
                         <button onClick={() => setShowModal(true)} className="button">Register</button>
+                        {showModal && <Modal onClose={() => setShowModal(false)} />}
                    </div>
 
                    <div className="flexCenter stats">

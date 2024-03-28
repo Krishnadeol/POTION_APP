@@ -8,7 +8,7 @@ import './Contact.css'
 
 const Contact = () => {
   return (
-    <section className="c-wrapper">
+    <section className="c-wrapper" id="contact-us">
         <div className="paddings innerWidth flexCenter c-container">
 
             {/* left side */}

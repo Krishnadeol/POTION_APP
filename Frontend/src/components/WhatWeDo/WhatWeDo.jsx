@@ -10,7 +10,7 @@ import data from "../../utils/accordion.jsx";
 const WhatWeDo = () => {
 
     return (
-        <section className="v-wrapper back">
+        <section className="v-wrapper back" id="about-us">
             <div className="paddings innerWidth flexCenter v-container">
 
                 {/* left side */}
@@ -22,9 +22,9 @@ const WhatWeDo = () => {
 
                 {/* right side */}
                 <div className="flexColStart v-right">
-                    <span className="tt">Glimpse of</span>
-                    <span className="primaryText">What We Do</span>
-                    <span className="secondaryText">
+                    <span className="glimpse">Glimpse of</span>
+                    <span className="primaryText weDo">What We Do</span>
+                    <span className="secondaryText weDo-para">
                     Empower communities by promoting food security and sustainability.
                     <br/>
                     Experience the transformative power of fresh food.

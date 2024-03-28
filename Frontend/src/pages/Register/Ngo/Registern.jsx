@@ -12,7 +12,7 @@ import transition from "../../../transition";
 import video from "../../../../public/Zero Hunger Film _ Global Goals.mp4";
 import "./ngor.css";
 
-function Registern() {
+function RegisterN() {
   const navigate = useNavigate();
   const [cred, setCred] = useState({
     name: "",
@@ -54,7 +54,7 @@ function Registern() {
 
       if (data.success) {
         localStorage.setItem("crowd-app-ngo-data", JSON.stringify(data.user));
-        navigate("/login");
+        navigate("/ngo_events");
       } else if (!data.success) {
         toast.error(data.error, tobj);
       }
@@ -86,7 +86,7 @@ function Registern() {
         }
       } catch (error) {
         toast.error(error.message, tobj);
-        console.log("loda");
+        console.log("load");
       }
     }
   };
@@ -203,4 +203,4 @@ function Registern() {
   );
 }
 
-export default transition(Registern);
+export default transition(RegisterN);
