@@ -161,6 +161,7 @@ router.post("/apply", async (req, res) => {
         .status(400)
         .json({ success, error: "You have already applied for the event" });
     }
+
     let event = await Applied.create({
       name: req.body.name,
       email: req.body.email,
@@ -200,7 +201,16 @@ router.get("/findmyevents", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
-
+// find all events
+router.get("/getevents", async (req, res) => {
+  try {
+    const data = await Events.find();
+    let success = true;
+    res.json({ success, data });
+  } catch (error) {
+    res.json({ error: error.message });
+  }
+});
 // donation
 
 router.post("/donate", async (req, res) => {

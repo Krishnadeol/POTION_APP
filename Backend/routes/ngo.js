@@ -87,6 +87,8 @@ router.post(
         name: req.body.name,
         password: hash,
         email: req.body.email,
+        UPI: req.body.UPI,
+        payee: req.body.payee,
       });
 
       const data = {
@@ -371,4 +373,35 @@ router.get("/getcampaigns", async (req, res) => {
     res.json({ error: error.message });
   }
 });
+
+// to set ngo as verified
+router.patch("/verified", async (req, res) => {
+  try {
+    const id = req.query.id;
+    const data = await Ngo.findByIdAndUpdate(
+      id,
+      { verified: true },
+      { new: true }
+    );
+    let success = true;
+    res.json({ success, data });
+  } catch (error) {
+    res.json({ error: error.message });
+  }
+});
+
+// get ngo upi and payee name
+router.get("/upi", async (req, res) => {
+  try {
+    const email = req.query.email;
+    const data = await Ngo.findOne({ email: email }, { payee: 1, UPI: 1 });
+
+    console.log(data);
+    res.json({ success: true, data });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 module.exports = router;
