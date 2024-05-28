@@ -10,15 +10,16 @@ import { FaUser, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import transition from "../../../transition";
 import video from "../../../../src/Zero Hunger Film _ Global Goals.mp4";
-import "./ngor.css";
 
-function RegisterN() {
+
+function RegisterI() {
   const navigate = useNavigate();
   const [cred, setCred] = useState({
     name: "",
     email: "",
     password: "",
     cpassword: "",
+    category: "",
   });
 
   const [show, setShow] = useState(false);
@@ -46,15 +47,15 @@ function RegisterN() {
     setShow(false);
 
     if (rOtp === enteredOtp) {
-      let { data } = await axios.post("http://localhost:5000/ngo/Register", {
+      let { data } = await axios.post("http://localhost:5000/user/Register", {
         name: cred.name,
         email: cred.email,
         password: cred.password,
+        category: cred.category,
       });
-
       if (data.success) {
-        localStorage.setItem("crowd-app-ngo-data", JSON.stringify(data.user));
-        navigate("/ngo_events");
+        localStorage.setItem("crowd-app-user-data", JSON.stringify(data.user));
+        navigate("/login");
       } else if (!data.success) {
         toast.error(data.error, tobj);
       }
@@ -73,7 +74,7 @@ function RegisterN() {
       try {
         console.log("a");
         let { data } = await axios.post(
-          "http://localhost:5000/ngo/check_user",
+          "http://localhost:5000/user/check_user",
           {
             email: cred.email,
           }
@@ -86,7 +87,7 @@ function RegisterN() {
         }
       } catch (error) {
         toast.error(error.message, tobj);
-        console.log("load");
+        console.log("loda");
       }
     }
   };
@@ -167,40 +168,38 @@ function RegisterN() {
             <button type="submit">Get Started</button>
             <div className="login-link">
               <p>
-                Already have an account?<Link to="/ngo_login"> SignIn</Link>
+                Already have an account?<Link to="/ind_login"> SignIn</Link>
               </p>
             </div>
           </form>
 
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Otp Verification</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form>
-                <Form.Group className="mb-3" controlId="eotp">
-                  <Form.Label>6 DIGITS OTP </Form.Label>
-                  <Form.Control
-                    type="Text"
-                    placeholder="Enter your otp"
-                    autoFocus
-                    onChange={handleOtpChange}
-                  />
-                </Form.Group>
-              </Form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="primary" onClick={handleClose}>
-                Submit Otp
-              </Button>
-            </Modal.Footer>
-          </Modal>
-
-          <ToastContainer />
-        </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Otp Verification</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="eotp">
+              <Form.Label>6 DIGITS OTP </Form.Label>
+              <Form.Control
+                type="Text"
+                placeholder="Enter your otp"
+                autoFocus
+                onChange={handleOtpChange}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose}>
+            Submit Otp
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <ToastContainer />
       </div>
     </div>
+  </div>
   );
 }
-
-export default transition(RegisterN);
+export default transition(RegisterI);

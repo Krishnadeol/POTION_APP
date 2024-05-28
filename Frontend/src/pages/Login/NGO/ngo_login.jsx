@@ -7,7 +7,7 @@ import { MdEmail } from "react-icons/md";
 import transition from "../../../transition";
 import video from "../../../../src/Zero Hunger Film _ Global Goals.mp4";
 import axios from "axios";
-import "./loignN.css";
+import "./ngo_login.css";
 
 function LoginN() {
   const navigate = useNavigate();
