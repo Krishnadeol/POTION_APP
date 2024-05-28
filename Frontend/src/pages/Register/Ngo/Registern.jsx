@@ -9,7 +9,7 @@ import Modal from "react-bootstrap/Modal";
 import { FaUser, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import transition from "../../../transition";
-import video from "../../../../public/Zero Hunger Film _ Global Goals.mp4";
+import video from "../../../../src/Zero Hunger Film _ Global Goals.mp4";
 import "./ngor.css";
 
 function RegisterN() {
