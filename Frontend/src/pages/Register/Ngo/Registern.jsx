@@ -203,4 +203,4 @@ function RegisterN() {
   );
 }
 
-export default transition(RegisterN);
+export default RegisterN;

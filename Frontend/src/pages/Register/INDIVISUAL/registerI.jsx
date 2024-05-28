@@ -10,8 +10,7 @@ import { FaUser, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import transition from "../../../transition";
 import video from "../../../../public/Zero Hunger Film _ Global Goals.mp4";
-import "./indivisualr.css"
-
+import "./indivisualr.css";
 
 function RegisterI() {
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ function RegisterI() {
     email: "",
     password: "",
     cpassword: "",
-    category: "",
+    category: "Idivisual",
   });
 
   const [show, setShow] = useState(false);
@@ -52,7 +51,6 @@ function RegisterI() {
         name: cred.name,
         email: cred.email,
         password: cred.password,
-        category: cred.category,
       });
       if (data.success) {
         localStorage.setItem("crowd-app-user-data", JSON.stringify(data.user));
@@ -104,9 +102,6 @@ function RegisterI() {
       return false;
     } else if (password !== cpassword) {
       toast.error("Confired password does not match", tobj);
-      return false;
-    } else if (category === "") {
-      toast.error("Please select a cetegory type", tobj);
       return false;
     }
     return true;
@@ -174,33 +169,33 @@ function RegisterI() {
             </div>
           </form>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Otp Verification</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="eotp">
-              <Form.Label>6 DIGITS OTP </Form.Label>
-              <Form.Control
-                type="Text"
-                placeholder="Enter your otp"
-                autoFocus
-                onChange={handleOtpChange}
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Submit Otp
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <ToastContainer />
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Otp Verification</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form>
+                <Form.Group className="mb-3" controlId="eotp">
+                  <Form.Label>6 DIGITS OTP </Form.Label>
+                  <Form.Control
+                    type="Text"
+                    placeholder="Enter your otp"
+                    autoFocus
+                    onChange={handleOtpChange}
+                  />
+                </Form.Group>
+              </Form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="primary" onClick={handleClose}>
+                Submit Otp
+              </Button>
+            </Modal.Footer>
+          </Modal>
+          <ToastContainer />
+        </div>
       </div>
     </div>
-  </div>
   );
 }
 export default transition(RegisterI);

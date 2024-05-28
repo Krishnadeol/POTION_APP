@@ -22,7 +22,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/ngo_register" element={<Registern />} />
+          <Route path="/ngo_register" element={<RegisterN />} />
           <Route path="/ind_register" element={<RegisterI />} />
           <Route path="/shop_register" element={<RegisterS />} />
           <Route path="/ngo_login" element={<LoginN />} />
