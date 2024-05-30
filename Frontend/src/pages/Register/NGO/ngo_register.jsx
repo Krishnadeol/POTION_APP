@@ -10,7 +10,7 @@ import { FaUser, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import transition from "../../../transition";
 import video from "../../../../src/Zero Hunger Film _ Global Goals.mp4";
-import "./ngor.css";
+import "./ngo_register.css";
 
 function RegisterN() {
   const navigate = useNavigate();
