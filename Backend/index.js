@@ -10,7 +10,7 @@ const mailRouter = require("./routes/otp");
 const userRouter = require("./routes/user");
 const shopRouter = require("./routes/shop");
 app.get("/", (req, res) => {
-  res.send("Hello betaji");
+  res.send("The Site is Live for Potion app");
 });
 
 // routes =>
