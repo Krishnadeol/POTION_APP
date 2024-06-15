@@ -8,6 +8,7 @@ import transition from "../../../transition";
 import video from "../../../../src/Zero Hunger Film _ Global Goals.mp4";
 import axios from "axios";
 import "./ngo_login.css";
+const baseURL = import.meta.env.VITE_API_URL;
 
 function LoginN() {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ function LoginN() {
 
     if (handleValidation) {
       try {
-        const { data } = await axios.post("http://localhost:5000/ngo/login", {
+        const { data } = await axios.post(`${baseURL}/ngo/login`, {
           email: cred.email,
           pass: cred.password,
         });

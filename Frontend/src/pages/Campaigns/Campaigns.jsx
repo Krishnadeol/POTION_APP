@@ -8,6 +8,8 @@ import Modal from "react-bootstrap/Modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import upiqr from "upiqr";
+const baseURL = import.meta.env.VITE_API_URL;
+
 export default function Campaigns() {
   const [curUser, setUser] = useState([]);
   const [myEvents, setEvents] = useState([]);
@@ -45,7 +47,7 @@ export default function Campaigns() {
     try {
       if (handleValidA()) {
         const { data } = await axios.patch(
-          `http://localhost:5000/ngo/updatecampaign?eid=${eventId}`,
+          `${baseURL}/ngo/updatecampaign?eid=${eventId}`,
           {
             email: cred.email,
             name: cred.name,
@@ -78,7 +80,7 @@ export default function Campaigns() {
     try {
       handleCloseD();
       const { data } = await axios.delete(
-        `http://localhost:5000/ngo/deletecampaign/${eventId}`
+        `${baseURL}/ngo/deletecampaign/${eventId}`
       );
 
       if (data.success) toast.success("Event deleted successfully", tobj);
@@ -179,10 +181,7 @@ export default function Campaigns() {
   const handleDonation = async (e) => {
     try {
       let email = "d.12a@gmail.com";
-      const { data } = await axios.get(
-        `http://localhost:5000/ngo/upi?email=${email}`,
-        {}
-      );
+      const { data } = await axios.get(`${baseURL}/ngo/upi?email=${email}`, {});
       if (data.success) {
         donCred.UPI = data.data.UPI;
         donCred.payee = data.data.payee;
@@ -229,9 +228,7 @@ export default function Campaigns() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(
-          `http://localhost:5000/ngo/getcampaigns`
-        );
+        const { data } = await axios.get(`${baseURL}/ngo/getcampaigns`);
 
         setEvents(data.data);
         console.log("myEvents", myEvents);

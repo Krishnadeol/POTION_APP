@@ -11,7 +11,7 @@ import { MdEmail } from "react-icons/md";
 import transition from "../../../transition";
 import video from "../../../../src/Zero Hunger Film _ Global Goals.mp4";
 import "./ngo_register.css";
-
+const baseURL = import.meta.env.VITE_API_URL;
 function RegisterN() {
   const navigate = useNavigate();
   const [cred, setCred] = useState({
@@ -34,7 +34,7 @@ function RegisterN() {
   };
 
   const handleShow = async () => {
-    let { data } = await axios.post("http://localhost:5000/otp", {
+    let { data } = await axios.post(`${baseURL}/otp`, {
       email: cred.email,
     });
     setrOtp(data.otp);
@@ -46,7 +46,7 @@ function RegisterN() {
     setShow(false);
 
     if (rOtp === enteredOtp) {
-      let { data } = await axios.post("http://localhost:5000/ngo/Register", {
+      let { data } = await axios.post(`${baseURL}/ngo/Register`, {
         name: cred.name,
         email: cred.email,
         password: cred.password,
@@ -72,12 +72,9 @@ function RegisterN() {
     if (handleValidation()) {
       try {
         console.log("a");
-        let { data } = await axios.post(
-          "http://localhost:5000/ngo/check_user",
-          {
-            email: cred.email,
-          }
-        );
+        let { data } = await axios.post(`{baseURL}/ngo/check_user`, {
+          email: cred.email,
+        });
 
         if (data.check === true) {
           handleShow();
