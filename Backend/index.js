@@ -5,6 +5,13 @@ require("dotenv").config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+const router = express.Router();
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger-output.json");
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument)); // you wiil find the collextion at this route
+
+app.use(router);
 const ngoRouter = require("./routes/ngo");
 const mailRouter = require("./routes/otp");
 const userRouter = require("./routes/user");
