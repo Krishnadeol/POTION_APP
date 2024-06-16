@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import useNavigate from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IoIosClose } from "react-icons/io";
 import { BiSolidBuildingHouse } from "react-icons/bi";
 import { FaUser, FaStore } from "react-icons/fa";
