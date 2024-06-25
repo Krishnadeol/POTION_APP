@@ -61,7 +61,7 @@ const Hero = () => {
                                 <CountUp start={18000} end={20000}/> <span>+</span>
                             </span>
                             <span className="secondaryText">
-                                Funded Programs
+                                Funded programs
                             </span>
                         </div>
                         <div className="flexColCenter stat">

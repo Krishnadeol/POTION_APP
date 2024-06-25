@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 import {useState} from 'react'
-
 import { IoIosClose } from "react-icons/io";
 import { BiSolidBuildingHouse } from "react-icons/bi";
 import {FaUser, FaStore} from "react-icons/fa";
