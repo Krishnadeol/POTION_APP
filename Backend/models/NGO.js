@@ -28,6 +28,11 @@ const NgoSchema = new Schema({
     default: false,
   },
 
+  verified: {
+    type: Boolean,
+    default: false,
+  },
+
   logoImage: {
     type: String,
     default: "",
@@ -37,12 +42,18 @@ const NgoSchema = new Schema({
     type: Number,
     default: null,
   },
-
+  UPI: {
+    type: String,
+    default: null,
+  },
   date: {
     type: Date,
     default: Date.now,
   },
-
+  payee: {
+    type: String,
+    default: null,
+  },
   funds: {
     type: Number,
     default: 0,

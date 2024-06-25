@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import { Card } from "react-bootstrap";
+
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { ToastContainer, toast } from "react-toastify";
@@ -289,7 +290,6 @@ export default function Allevents() {
   };
   return (
     <>
-      <></>
       <h1>events</h1>
       <Button variant="primary" onClick={handleShowA}>
         Add an event
