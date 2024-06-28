@@ -5,7 +5,7 @@ import Modal from "../Modal/Modal.jsx"
 import { IoFastFood } from "react-icons/io5";
 import Typewriter  from 'typewriter-effect';
 import CountUp from 'react-countup';
-
+import {motion } from "framer-motion"
 const Hero = () => {
 
     const [showModal, setShowModal] = useState(false)
@@ -20,10 +20,17 @@ const Hero = () => {
 
                    <div className="hero-title adj">
                         <div className="orange-circle"></div>
-                        <h1>
+                        <motion.h1
+                        initial={{y: "2rem", opacity: 0}}
+                        animate={{y: 0, opacity: 1}}
+                        transition= {{
+                            duration: 2,
+                            type: "spring"
+                        }}
+                        >
                           Feeding<br />
                           Hope, Defeating <br /> <div className="content hero-title"><h1>Hunger</h1><h1>Hunger</h1></div>
-                        </h1>
+                        </motion.h1>
                         <br/><br/>
                    </div>
                     
@@ -79,9 +86,13 @@ const Hero = () => {
 
                 {/* <!-- Right side --> */}
                 <div className="flexCenter hero-right">
-                    <div className="image-container">
+                    <motion.div
+                    initial={{x: "7rem", opacity: 0}} 
+                    animate={{x: 0, opacity: 1}}
+                    transition={{duration: 2, type: "spring"}}
+                    className="image-container">
                         <img src="./FoodChildEat2.jpg" alt="Children Eating Food" />
-                    </div>
+                    </motion.div>
                 </div>
             </div>
             

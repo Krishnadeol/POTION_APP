@@ -38,6 +38,11 @@
 
 .but{
     border-radius: 20px;
+    font-weight: 500;
+    padding: 0.6rem 1.4rem;
+    color: rgb(188, 75, 75);
+    background: #e7b14c;
+    border: none;
 }
 .but2{
     color: orangered;

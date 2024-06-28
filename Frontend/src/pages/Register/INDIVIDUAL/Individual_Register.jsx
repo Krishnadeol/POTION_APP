@@ -9,14 +9,9 @@ import Modal from "react-bootstrap/Modal";
 import { FaUser, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import transition from "../../../transition";
+import "./Individual_Register.css"
 import video from "../../../../src/Zero Hunger Film _ Global Goals.mp4";
-<<<<<<< HEAD:Frontend/src/pages/Register/INDIVISUAL/registerI.jsx
-import "./indivisualr.css"
-
-
-=======
 const baseURL = import.meta.env.VITE_API_URL;
->>>>>>> 45ae20f5140be1d40d4739a49a1c49ee398bf06c:Frontend/src/pages/Register/INDIVIDUAL/Individual_Register.jsx
 function RegisterI() {
   const navigate = useNavigate();
   const [cred, setCred] = useState({

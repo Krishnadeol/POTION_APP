@@ -7,11 +7,7 @@ import { FaUser, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import transition from "../../../transition";
 import video from "../../../../src/Zero Hunger Film _ Global Goals.mp4";
-<<<<<<< HEAD:Frontend/src/pages/Register/Shop/registers.jsx
-import "./shopr.css"
-=======
 import "./shop_register.css"
->>>>>>> 45ae20f5140be1d40d4739a49a1c49ee398bf06c:Frontend/src/pages/Register/Shop/shop_register.jsx
 
 
 function RegisterS() {

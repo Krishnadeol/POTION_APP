@@ -10,13 +10,8 @@ import { FaUser, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import transition from "../../../transition";
 import video from "../../../../src/Zero Hunger Film _ Global Goals.mp4";
-<<<<<<< HEAD:Frontend/src/pages/Register/Ngo/Registern.jsx
-import "./ngor.css";
-
-=======
 import "./ngo_register.css";
 const baseURL = import.meta.env.VITE_API_URL;
->>>>>>> 45ae20f5140be1d40d4739a49a1c49ee398bf06c:Frontend/src/pages/Register/NGO/ngo_register.jsx
 function RegisterN() {
   const navigate = useNavigate();
   const [cred, setCred] = useState({

@@ -5,6 +5,7 @@ import NGOs from "../../components/NGOs/NGOs";
 import Programs from "../../components/Programs/Programs";
 import WhatWeDo from "../../components/WhatWeDo/WhatWeDo";
 import Contact from '../../components/Contact/Contact';
+import GetFood from '../../components/Get Food Home/GetFood.jsx';
 import Curve from '../../components/Curve/Curve';
 import Footer from '../../components/Footer/Footer';
 import transition from "../../transition.jsx"
@@ -24,6 +25,8 @@ function Home() {
         <WhatWeDo />
         <br/><br/>
         <Contact />
+        <br/><br/>
+        <GetFood />
         <br/><br/>
         <Curve />
         <Footer />
