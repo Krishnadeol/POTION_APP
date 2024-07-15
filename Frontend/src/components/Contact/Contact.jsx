@@ -3,12 +3,14 @@ import {MdCall} from 'react-icons/md'
 import {BsFillChatDotsFill} from 'react-icons/bs'
 import { MdMarkEmailRead } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
+import {motion} from 'framer-motion';
+import {fadeIn} from "../../variants";
 import transition from "../../transition"
 import './Contact.css'
 
 const Contact = () => {
   return (
-    <section className="c-wrapper" id="contact-us">
+    <div className="c-wrapper" id="contact-us">
         <div className="paddings innerWidth flexCenter c-container">
 
             {/* left side */}
@@ -17,7 +19,11 @@ const Contact = () => {
                 <span className="primaryText">Easy to Contact Us</span>
                 <span className="secondaryText">Just like an act of charity binds us in unity, a conversation between two souls unites hearts.</span>
 
-                <div className="flexColStart contactModes">
+                <motion.div variants={fadeIn("up", 0.2)} 
+                initial="hidden" 
+                whileInView={"show"}
+                viewport={{once: false, amount: 0.7}}
+                className="flexColStart contactModes">
                     {/* first row */}
                     <div className="flexStart row">
                         
@@ -88,19 +94,24 @@ const Contact = () => {
 
                     </div>
                 
-                </div>
+                </motion.div>
             </div>
 
 
             {/* right side */}
-            <div className="c-right">
+            <motion.div 
+            variants={fadeIn("left", 0.3)} 
+            initial="hidden" 
+            whileInView={"show"}
+            viewport={{once: false, amount: 0.7}}
+            className="c-right">
                 <div className="img-con image-container">
                     <img src="./SmileChild.png" alt="Contact Us- Smile Child" />
                 </div>
-            </div>
+            </motion.div>
 
         </div>
-    </section>
+    </div>
   )
 }
 

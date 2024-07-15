@@ -5,7 +5,7 @@ import {MdOutlineArrowDropDown, MdOutlineArrowDropDownCircle} from "react-icons/
 import transition from "../../transition"
 import "./WhatWeDo.css";
 import data from "../../utils/accordion.jsx";
-
+import {motion } from "framer-motion"
 
 const WhatWeDo = () => {
 
@@ -15,9 +15,13 @@ const WhatWeDo = () => {
 
                 {/* left side */}
                 <div className="v-left">
-                    <div className="image-container">
+                    <motion.div 
+                    initial={{x: "-7rem", opacity: 0}} 
+                    animate={{x: 0, opacity: 1}}
+                    transition={{duration: 2, type: "spring"}}
+                    className="image-container">
                         <img src="./FoodCharity.png" alt="Food Charity"/>
-                    </div>
+                    </motion.div>
                 </div>
 
                 {/* right side */}

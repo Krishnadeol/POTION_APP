@@ -128,7 +128,7 @@ const Modal = ({ onClose }) => {
               {/*<button className="button">LogIn</button>*/}
               <p className="account-text">
                 Don't have an account?
-                <a href="#" id="sign-up-btn2">
+                <a href="#" id="sign-up-btn2" className="sign-in-up-btn-res">
                   Sign up
                 </a>
               </p>
@@ -178,7 +178,7 @@ const Modal = ({ onClose }) => {
               {/*<button className="button">SignUp</button>*/}
               <p className="account-text">
                 Already have an account?{" "}
-                <a href="#" id="sign-in-btn2">
+                <a href="#" id="sign-in-btn2" className="sign-in-up-btn-res">
                   Sign in
                 </a>
               </p>

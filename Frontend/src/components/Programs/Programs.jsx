@@ -4,6 +4,7 @@ import "swiper/css"
 import './Programs.css'
 import data from '../../utils/slider.json'
 import {sliderSettings} from "../../utils/common";
+import {motion} from "framer-motion";
 import transition from "../../transition"
 
 const Programs = () => {

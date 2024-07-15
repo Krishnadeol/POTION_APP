@@ -238,7 +238,9 @@ a {
         height: 100%;
     }
     .popUp{
-        width: 80%;
+        margin-left: -20px;
+        margin-top: -120px;
+        width: 90%;
         height: 100%;
     }
     form.sign-up-form {
@@ -257,6 +259,10 @@ a {
     .account-text {
         display: initial;
         margin-top: 30px;
+    }
+    .sign-in-up-btn-res{
+        color: rgb(255, 140, 0);
+        text-decoration: none;
     }
 }
 @media (max-width:320px) {

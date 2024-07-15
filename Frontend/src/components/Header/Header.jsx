@@ -1,6 +1,7 @@
 import React, {useState} from 'react' 
 import {BiMenuAltRight} from 'react-icons/bi'
 import { Link } from "react-router-dom"
+import {motion} from "framer-motion"
 import OutsideClickHandler from "react-outside-click-handler";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import './Header.css'
@@ -27,9 +28,12 @@ const Header = () => {
                     <AnchorLink href="#about-us" className="nav">About us</AnchorLink>
                     <AnchorLink href="#contact-us" className="nav">Contact us</AnchorLink>
                     <a href="" className="nav">Donate Now</a>
-                    <button className="button but">
+                    <motion.button 
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    className="but">
                         <a href="" className="but2">Get Food</a>
-                    </button>
+                    </motion.button>
                 </div>
                 </OutsideClickHandler>
 

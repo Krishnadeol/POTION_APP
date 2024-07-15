@@ -9,6 +9,7 @@ import Modal from "react-bootstrap/Modal";
 import { FaUser, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import transition from "../../../transition";
+import "./Individual_Register.css"
 import video from "../../../../src/Zero Hunger Film _ Global Goals.mp4";
 const baseURL = import.meta.env.VITE_API_URL;
 function RegisterI() {

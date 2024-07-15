@@ -13,13 +13,13 @@ const signUp = () => {
                             <div className="input-field">
                               <FaUser className="i" />
                               <input type="radio" className="signIn" value="USER" id="signIn"/>
-                              <label htmlFor="User">User</label>
+                              <label htmlFor="User">Buyer</label>
                             </div>
                             {/*NGO*/}
                             <div className="input-field">
                               <BiSolidBuildingHouse className="i" /> 
                               <input type="radio" className="signIn" value="NGO" id="signIn"/>
-                              <label htmlFor="Ngo">ngo</label>
+                              <label htmlFor="Ngo">Seller</label>
                             </div>
                             {/*StoreOwner*/}
                             <div className="input-field">
