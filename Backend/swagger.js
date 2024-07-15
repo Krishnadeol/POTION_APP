@@ -2,7 +2,7 @@ const swaggerAutogen = require("swagger-autogen")();
 
 const doc = {
   info: {
-    title: "My API",
+    title: "POTION APP APIs",
     description: "Description",
   },
   host: "potion-app-2.onrender.com/",

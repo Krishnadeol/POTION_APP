@@ -26,11 +26,11 @@ const Modal = ({ onClose }) => {
   const handleSignUpSubmit = (f) => {
     f.preventDefault();
     if (signUpValue === "3") {
-      window.location.href = "/ind_register";
+      navigate("/ind_register");
     } else if (signUpValue === "4") {
-      window.location.href = "/ngo_register";
+      navigate("/ngo_register");
     } else if (signUpValue === "5") {
-      window.location.href = "/shop_register";
+      navigate("/shop_register");
     }
   };
 
