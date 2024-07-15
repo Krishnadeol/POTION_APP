@@ -27,17 +27,11 @@ function App() {
           <Route path="/shop_register" element={<RegisterS />} />
           <Route path="/ngo_login" element={<LoginN />} />
           <Route path="/ind_login" element={<LoginI />} />
-
+          <Route path="/shop_login" element={<LoginS />} />
+          
           <Route path="/ngo_events" element={<Allevents />} />
           <Route path="/ngo_Campaigns" element={<Campaigns />} />
-
-          <Route path="/ind_login" element={<LoginI />} />
-          <Route path="/ind_register" element={<RegisterI />} />
           <Route path="/user_vol" element={<Volenteer />} />
-          <Route path="/shop_login" element={<LoginS />} />
-
-          <Route path="/shop_register" element={<RegisterS />} />
-
           <Route path="/ngo_verification" element={<Verify />} />
         </Routes>
       </BrowserRouter>

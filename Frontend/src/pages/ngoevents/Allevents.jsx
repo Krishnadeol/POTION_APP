@@ -206,7 +206,7 @@ export default function Allevents() {
     const fetchData = async () => {
       try {
         if (!localStorage.getItem("crowd-app-ngo-data")) {
-          navigate("/");
+          navigate("/ngo_events");  //will change after frontend done
         } else {
           console.log(localStorage.getItem("crowd-app-ngo-data"));
           setUser(JSON.parse(localStorage.getItem("crowd-app-ngo-data")));

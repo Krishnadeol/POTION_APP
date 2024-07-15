@@ -1,0 +1,145 @@
+.hero-wrapper{
+    color: white;
+    position: relative;
+    padding-bottom: 2rem;
+    background-color: #068d6e ;
+}
+
+.hero-container{
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+/* left side */
+.hero-left{
+    gap: 3rem;
+}
+
+.hero-title{
+    position: relative;
+    z-index: 0;
+}
+
+.hero-title>h1{
+    font-weight: 600;
+    font-size: 3.8rem;
+    line-height: 4rem;
+}
+
+
+.orange-circle{
+    height: 4rem;
+    width: 4rem;
+    background: var(--orange-gradient);
+    border-radius: 999px;
+    position: absolute;
+    right: 43%;
+    top: -10%;
+    z-index: -1;
+}
+
+.adj{
+    margin-top: -60px;
+}
+.content{
+    position: relative;
+}
+.content h1{
+    position: absolute;
+}
+.content h1:nth-child(1){
+    color: transparent;
+    -webkit-text-stroke: 2px  #ff922d;
+}
+.content h1:nth-child(2){
+    color: #ff922d;
+    animation: water 4s ease-in-out infinite;
+}
+
+@keyframes water{
+    0%, 100%{
+        clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+    }
+    50%{
+        clip-path: polygon(0 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+    }
+}
+
+.Register{
+    background-color: white;
+    border-radius: 8px;
+    border: 3px solid #53b09b;
+    padding: 0.5rem 0.8rem;
+    justify-content: space-between;
+}
+
+.Register> input{
+    background: none;
+    outline: none;
+    border-color: white;
+}
+
+.auto-type{
+    width: 10rem;
+    height: 2rem;
+    color: black;
+    padding-left: 5%;
+    padding-top: 2%;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: 600;
+}
+
+.stats{
+    width: 100%;
+    justify-content: space-between;
+}
+
+.stat>:nth-child(1){
+    font-size: 2rem;
+}
+
+.stat>:nth-child(1)>:last-child{
+    color: orange;
+}
+
+/* right side */
+.image-container{
+    width: 30rem;
+    height: 35rem;
+    overflow: hidden;
+    border-radius: 15rem 15rem 0 0;
+    border: 8px solid rgba(255,255,255,0.12);
+}
+
+.image-container>img{
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 640px){
+    .hero-container{
+        margin-top: 2rem;
+        justify-content: space-around;
+    }
+    .hero-title>h1{
+        font-size: 2.5rem;
+        line-height: 3rem;
+    }
+    .image-container{
+        width: 95%;
+        height: 35rem;
+    }
+    .stats{
+        justify-content: center; 
+        gap: 1.5rem;
+    }
+    .hero-right{
+        width: 100%;
+    }
+    .stat>:nth-child(1){
+        font-size: 1.5rem;
+    }
+    .stat>:nth-child(1){
+        font-size: 0.8rem;
+    }
+}
