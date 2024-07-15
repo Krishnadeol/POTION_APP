@@ -7,6 +7,7 @@ import { MdEmail } from "react-icons/md";
 import transition from "../../../transition";
 import video from "../../../../src/Zero Hunger Film _ Global Goals.mp4";
 import axios from "axios";
+const baseURL = import.meta.env.VITE_API_URL;
 
 function LoginI() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ function LoginI() {
 
     if (handleValidation) {
       try {
-        const { data } = await axios.post("http://localhost:5000/user/login", {
+        const { data } = await axios.post(`${baseURL}/user/login`, {
           email: cred.email,
           pass: cred.password,
         });
@@ -68,7 +69,7 @@ function LoginI() {
 
   return (
     <>
-    <div className="bgContainer">
+      <div className="bgContainer">
         <div className="overlay">
           <video className="vid" src={video} autoPlay={true} loop />
           <div className="bd">

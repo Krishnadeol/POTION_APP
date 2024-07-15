@@ -7,6 +7,7 @@ import { MdEmail } from "react-icons/md";
 import transition from "../../../transition";
 import video from "../../../../src/Zero Hunger Film _ Global Goals.mp4";
 import axios from "axios";
+const baseURL = import.meta.env.VITE_API_URL;
 
 function LoginS() {
   const navigate = useNavigate();
@@ -22,7 +23,8 @@ function LoginS() {
     draggable: true,
   };
   useEffect(() => {
-    if (localStorage.getItem("crowd-app-ngo-data")) {       /* crowd-app-shop-data */
+    if (localStorage.getItem("crowd-app-ngo-data")) {
+      /* crowd-app-shop-data */
       navigate("/");
     }
   }, [navigate]);
@@ -32,8 +34,8 @@ function LoginS() {
 
     if (handleValidation) {
       try {
-        const { data } = await axios.post("http://localhost:5000/ngo/login", {     /* localhost:5000/shop/login */
-          email: cred.email,
+        const { data } = await axios.post(`${baseURL}/ngo/login`, {
+          /* localhost:5000/shop/login */ email: cred.email,
           pass: cred.password,
         });
 

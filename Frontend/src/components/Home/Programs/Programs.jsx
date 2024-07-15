@@ -2,9 +2,10 @@ import React from 'react'
 import {Swiper, SwiperSlide, useSwiper} from 'swiper/react'
 import "swiper/css"
 import './Programs.css'
-import data from '../../../utils/slider.json'
-import {sliderSettings} from "../../../utils/common";
-import transition from "../../../transition"
+import data from '../../utils/slider.json'
+import {sliderSettings} from "../../utils/common";
+import {motion} from "framer-motion";
+import transition from "../../transition"
 
 const Programs = () => {
     return (

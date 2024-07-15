@@ -85,5 +85,3 @@ const WhatWeDo = () => {
         </section>
     );
 };
-
-export default transition(WhatWeDo);

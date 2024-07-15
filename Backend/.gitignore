@@ -2,3 +2,7 @@
 node_modules/
 package-lock.json
 .env
+<<<<<<< HEAD
+=======
+# this is a change
+>>>>>>> 73428b200c74da968a42a31c7e60b8725e01116f

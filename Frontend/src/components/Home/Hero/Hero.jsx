@@ -1,12 +1,11 @@
 import React from 'react';
 import "./Hero.css";
 import { useState } from 'react'
-import Modal from "../Modal/Modal"
+import Modal from "../Modal/Modal.jsx"
 import { IoFastFood } from "react-icons/io5";
 import Typewriter  from 'typewriter-effect';
 import CountUp from 'react-countup';
 import {motion } from "framer-motion"
-
 const Hero = () => {
 
     const [showModal, setShowModal] = useState(false)
@@ -69,7 +68,7 @@ const Hero = () => {
                                 <CountUp start={18000} end={20000}/> <span>+</span>
                             </span>
                             <span className="secondaryText">
-                                Funded Programs
+                                Funded programs
                             </span>
                         </div>
                         <div className="flexColCenter stat">

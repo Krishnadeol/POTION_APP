@@ -107,7 +107,7 @@
     text-decoration: underline;
 }
 
-@media (max-width: 675){
+@media (max-width: 635){
    .wrapper {
     font-size: 6px;
     text-align: center;
@@ -116,6 +116,10 @@
    .bd{
     padding-left: 25%;
    }
+   .input-box{
+    margin-right: -100px;
+   }
+
 }
 
 @media (max-width: 375){
@@ -126,7 +130,10 @@
     }
     .bd{
      padding-left: 10%;
-     position: absolute;
      top: 10%;
+     margin-left: -40px;
+    }
+    .input-box{
+        margin-right: -100px;
     }
  }

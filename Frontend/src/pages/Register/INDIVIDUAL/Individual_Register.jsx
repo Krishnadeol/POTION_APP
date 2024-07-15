@@ -9,9 +9,9 @@ import Modal from "react-bootstrap/Modal";
 import { FaUser, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import transition from "../../../transition";
+import "./Individual_Register.css"
 import video from "../../../../src/Zero Hunger Film _ Global Goals.mp4";
-
-
+const baseURL = import.meta.env.VITE_API_URL;
 function RegisterI() {
   const navigate = useNavigate();
   const [cred, setCred] = useState({
@@ -35,7 +35,7 @@ function RegisterI() {
   };
 
   const handleShow = async () => {
-    let { data } = await axios.post("http://localhost:5000/otp", {
+    let { data } = await axios.post(`${baseURL}/otp`, {
       email: cred.email,
     });
     setrOtp(data.otp);
@@ -47,7 +47,7 @@ function RegisterI() {
     setShow(false);
 
     if (rOtp === enteredOtp) {
-      let { data } = await axios.post("http://localhost:5000/user/Register", {
+      let { data } = await axios.post(`${baseURL}/user/Register`, {
         name: cred.name,
         email: cred.email,
         password: cred.password,
@@ -73,12 +73,9 @@ function RegisterI() {
     if (handleValidation()) {
       try {
         console.log("a");
-        let { data } = await axios.post(
-          "http://localhost:5000/user/check_user",
-          {
-            email: cred.email,
-          }
-        );
+        let { data } = await axios.post(`${baseURL}/user/check_user`, {
+          email: cred.email,
+        });
 
         if (data.check === true) {
           handleShow();
@@ -173,33 +170,33 @@ function RegisterI() {
             </div>
           </form>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Otp Verification</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="eotp">
-              <Form.Label>6 DIGITS OTP </Form.Label>
-              <Form.Control
-                type="Text"
-                placeholder="Enter your otp"
-                autoFocus
-                onChange={handleOtpChange}
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Submit Otp
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <ToastContainer />
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Otp Verification</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form>
+                <Form.Group className="mb-3" controlId="eotp">
+                  <Form.Label>6 DIGITS OTP </Form.Label>
+                  <Form.Control
+                    type="Text"
+                    placeholder="Enter your otp"
+                    autoFocus
+                    onChange={handleOtpChange}
+                  />
+                </Form.Group>
+              </Form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="primary" onClick={handleClose}>
+                Submit Otp
+              </Button>
+            </Modal.Footer>
+          </Modal>
+          <ToastContainer />
+        </div>
       </div>
     </div>
-  </div>
   );
 }
 export default transition(RegisterI);

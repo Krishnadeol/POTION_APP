@@ -98,6 +98,20 @@ a {
    transform: scale(1.1);
 }
 
+::-webkit-scrollbar{
+  width: 12px;
+}
+
+::-webkit-scrollbar-track{
+  background: #e8e6e6b8;
+}
+
+::-webkit-scrollbar-thumb{
+  background:  rgba(255,166,0,1);
+  border-radius: 8px;
+  height: 20%;
+}
+
 
 /* media queries */
 @media (min-width: 1536px) {

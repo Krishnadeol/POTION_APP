@@ -7,6 +7,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+const baseURL = import.meta.env.VITE_API_URL;
 
 export default function volenteer() {
   const tobj = {
@@ -35,7 +36,7 @@ export default function volenteer() {
   const handleApply = async () => {
     try {
       if (handleValidA()) {
-        const { data } = await axios.post(`http://localhost:5000/user/apply`, {
+        const { data } = await axios.post(`${baseURL}/user/apply`, {
           name: cred.name,
           email: cred.email,
           message: cred.message,
@@ -113,9 +114,7 @@ export default function volenteer() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(
-          `http://localhost:5000/user/getevents`
-        );
+        const { data } = await axios.get(`${baseURL}/user/getevents`);
 
         setEvents(data.data);
         console.log("myEvents", myEvents);
