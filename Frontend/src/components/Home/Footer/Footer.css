@@ -1,0 +1,114 @@
+.f-container{
+    justify-content: space-between;
+}
+
+.f-left{
+    gap: 1rem;
+}
+
+.f-menu{
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    font-weight: 600;
+    color: #13d9e0;
+}
+
+.i{
+    display: flex;
+    flex-direction: row;
+    color: rgb(248, 224, 2);
+    gap: 1rem;
+}
+
+.nav{
+    text-decoration: none; 
+    color: inherit;
+}
+
+.info-list{
+    margin-left: -33px;
+}
+.info-list li{
+    list-style: none;
+    float: left;
+    transition: 0.9s;
+}
+.info-list:hover li{
+    transform: rotateY(360deg);
+}
+.info-list:hover li:nth-child(1){
+    transition-delay: 0.9s;
+}
+.info-list:hover li:nth-child(2){
+    transition-delay: 0.8s;
+}
+.info-list:hover li:nth-child(3){
+    transition-delay: 0.7s;
+}
+.info-list:hover li:nth-child(4){
+    transition-delay: 0.6s;
+}
+.info-list:hover li:nth-child(5){
+    transition-delay: 0.5s;
+}
+.info-list:hover li:nth-child(6){
+    transition-delay: 0.4s;
+}
+.info-list:hover li:nth-child(7){
+    transition-delay: 0.3s;
+}
+
+
+/*Animation*/
+@keyframes heartbeat{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.35);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+.Facebook, .Twitter, .Instagram, .Linkedin{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.Facebook:hover{
+    animation: heartbeat 1s infinite;
+    fill: #4267B2;
+    color: #4267B2;
+    opacity: 1.0;
+}
+
+.Twitter:hover{
+    animation: heartbeat 1s infinite;
+    fill:  #000000;
+    color: #000000;
+}
+
+.Instagram:hover{
+    animation: heartbeat 1s infinite;
+    fill:  #f46ca5;
+    color: #f46ca5;
+}
+
+.Linkedin:hover{
+    animation: heartbeat 1s infinite;
+    fill:  #05e6ff;
+    color: #05e6ff;
+}
+
+/*Responsive*/
+@media (max-width: 768px){
+    .f-container{
+        justify-content: center;
+    }
+    .f-container>div{
+        align-items: center !important;
+        text-align: center;
+    }
+}

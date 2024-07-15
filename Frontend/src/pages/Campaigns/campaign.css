@@ -1,0 +1,9 @@
+.Campaign_Home {
+    display: flex;
+    height: 100%;
+}
+
+.Campaign_Home_Container {
+    width: 90%;
+    color:black;
+}

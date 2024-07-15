@@ -1,0 +1,163 @@
+<<<<<<< HEAD:Frontend/src/components/Home/Header/Header.css
+.h-wrapper{
+    background: #068d6e;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.h-container{
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    color: var(--secondary);  
+}
+
+.Logo{
+    margin-right: auto;
+}
+
+.h-menu{
+    gap: 2rem;
+    border-bottom: 4px solid transparent; 
+}
+
+.h-menu>*:hover{
+    cursor:  pointer;
+    border-bottom: 4px solid rgba(206, 12, 12, 0.94);
+}
+
+.nav:hover{
+    border-bottom: 4px solid orangered;
+    transition: 250ms;
+}
+
+.menu-icon{
+    display: none;
+}
+
+.but{
+    font-weight: 500;
+    padding: 0.6rem 1.4rem;
+    color: rgb(188, 75, 75);
+    background: #e7b14c;
+    border: none;
+    border-radius: 20px;
+}
+.but2{
+    color: orangered;
+    text-decoration: none; 
+    color: inherit;
+}
+
+.nav{
+    text-decoration: none; 
+    color: inherit;
+}
+
+@media (max-width: 768px){
+    .menu-icon{
+        display: block;
+    }
+
+    .h-menu{
+        color: var(--black);
+        position: absolute;
+        top: 3rem;
+        right: 4rem;
+        background: white;
+        flex-direction: column;
+        font-weight: 500;
+        padding: 3rem;
+        border-radius: 10px;
+        align-items: flex-start;
+        background: rgba(255,255,255, 0.4);
+        box-shadow: 0px 4px 4px rgba(0,0,0,0.05);
+        z-index: 1;
+        cursor: pointer;
+        transition: all 500ms ease-out;
+    }
+}
+=======
+.h-wrapper{
+    background: #068d6e;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.h-container{
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    color: var(--secondary);  
+}
+
+.Logo{
+    margin-right: auto;
+}
+
+.h-menu{
+    gap: 2rem;
+    border-bottom: 4px solid transparent; 
+}
+
+.h-menu>*:hover{
+    cursor:  pointer;
+    border-bottom: 4px solid rgba(206, 12, 12, 0.94);
+}
+
+.nav:hover{
+    border-bottom: 4px solid orangered;
+    transition: 250ms;
+}
+
+.menu-icon{
+    display: none;
+}
+
+.but{
+    border-radius: 20px;
+    font-weight: 500;
+    padding: 0.6rem 1.4rem;
+    color: rgb(188, 75, 75);
+    background: #e7b14c;
+    border: none;
+}
+.but2{
+    color: orangered;
+    text-decoration: none; 
+    color: inherit;
+}
+
+.nav{
+    text-decoration: none; 
+    color: inherit;
+}
+
+@media (max-width: 768px){
+    .menu-icon{
+        display: block;
+    }
+
+    .h-menu{
+        color: var(--black);
+        position: absolute;
+        top: 3rem;
+        right: 4rem;
+        background: white;
+        flex-direction: column;
+        font-weight: 500;
+        padding: 3rem;
+        border-radius: 10px;
+        align-items: flex-start;
+        background: rgba(255,255,255, 0.4);
+        box-shadow: 0px 4px 4px rgba(0,0,0,0.05);
+        z-index: 1;
+        cursor: pointer;
+        transition: all 500ms ease-out;
+    }
+}
+>>>>>>> 73428b200c74da968a42a31c7e60b8725e01116f:Frontend/src/components/Header/Header.css
