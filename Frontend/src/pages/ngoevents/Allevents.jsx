@@ -116,8 +116,10 @@ export default function Allevents() {
         `http://localhost:5000/ngo/deleteevent/${eventId}`
       );
 
-      if (data.success) toast.success("Event deleted successfully", tobj);
-      else toast.error("Event deleted successfully", tobj);
+      if (data.success) {
+        window.location.reload();
+        toast.success("Event deleted successfully", tobj);
+      } else toast.error("Event deleted successfully", tobj);
     } catch (error) {
       toast.error(error.message, tobj);
     }
@@ -141,7 +143,7 @@ export default function Allevents() {
     }
   };
 
-  // for setting the all the cred values to empty string
+  // for setting all the cred values to empty string
   const resetCred = () => {
     const emptyCred = Object.fromEntries(
       Object.entries(cred).map(([key, _]) => [key, ""])
@@ -150,18 +152,18 @@ export default function Allevents() {
   };
 
   const handleShowA = () => {
+    const newCred = { ...cred, email: curUser.email };
     resetCred();
-    setcred({ ...cred, email: curUser.email });
-    console.log(cred);
+    setcred(newCred);
     setShowA(true);
   };
 
   const handleValidA = () => {
     if (
-      cred.email == "" ||
-      cred.name == "" ||
-      cred.startDate == "" ||
-      cred.endDate == "" ||
+      cred.email === "" ||
+      cred.name === "" ||
+      cred.startDate === "" ||
+      cred.endDate === "" ||
       cred.description.length < 4
     ) {
       toast.error("Fields cannot be left blank", tobj);
@@ -174,7 +176,8 @@ export default function Allevents() {
   // Modal to add event
   const handleAdd = async () => {
     try {
-      let { data } = await axios.post(`${import.meta.env.VITE_URL}`, {
+      console.log(cred, " Credeintials for adding an event");
+      const { data } = await axios.post(`http://localhost:5000/ngo/addevent`, {
         email: cred.email,
         name: cred.name,
         description: cred.description,
@@ -184,12 +187,13 @@ export default function Allevents() {
         oppportunity: cred.opportunity,
       });
 
+      console.log(" After API call of adding an event");
+
       if (data.success) {
-        toast.success("Event added successfully ", tobj);
         window.location.reload();
+        toast.success("Event added successfully ", tobj);
       } else {
-        toast.error(" Server error", tobj);
-        alert("not sending the request");
+        toast.error("", tobj);
       }
     } catch (error) {
       console.log({ error: error.message });
@@ -205,11 +209,12 @@ export default function Allevents() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log("Inside the first useEffect");
         if (!localStorage.getItem("crowd-app-ngo-data")) {
           navigate("/");
         } else {
-          console.log(localStorage.getItem("crowd-app-ngo-data"));
           setUser(JSON.parse(localStorage.getItem("crowd-app-ngo-data")));
+          console.log(curUser, "this is after setting the curuser");
         }
       } catch (error) {
         console.log({ error: error.message });

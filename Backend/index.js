@@ -9,6 +9,13 @@ const router = express.Router();
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger-output.json");
 
+// const corsOptions = {
+//   origin: "http://localhost:5173/",
+//   optionsSuccessStatus: 200,
+// };
+
+// app.use(cors(corsOptions));
+
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument)); // you wiil find the collextion at this route
 
 app.use(router);
@@ -19,7 +26,7 @@ const shopRouter = require("./routes/shop");
 app.get("/", (req, res) => {
   res.send("The Site is Live for Potion app");
 });
-
+console.log("here i am");
 // routes =>
 app.use("/ngo", ngoRouter);
 app.use("/otp", mailRouter);

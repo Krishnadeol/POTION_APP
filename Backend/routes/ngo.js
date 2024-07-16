@@ -151,7 +151,7 @@ router.post(
 
       success = true;
       const token = jwt.sign(data, JWT_SECRET);
-      res.json({ success, userWithoutPassword });
+      res.json({ success, user: userWithoutPassword });
     } catch (error) {
       console.error(error.message);
       res.status(500).json({ error: error.message });

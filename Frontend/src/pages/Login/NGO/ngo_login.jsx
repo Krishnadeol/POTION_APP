@@ -32,20 +32,17 @@ function LoginN() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (handleValidation) {
+    if (handleValidation()) {
       try {
         const { data } = await axios.post(`${baseURL}/ngo/login`, {
           email: cred.email,
           pass: cred.password,
         });
-
+        console.log(data, "Data of the user trying to login");
         if (data.success) {
-          localStorage.setItem(
-            "crowd-app-ngo-data",
-            JSON.stringify(data.userWithoutPassword)
-          );
+          localStorage.setItem("crowd-app-ngo-data", JSON.stringify(data.user));
           alert("logged in");
-          console.log(data.userWithoutPassword);
+          console.log(data.user);
           navigate("/ngo_events");
         } else if (!data.success) {
           toast.error(data.error, tobj);
