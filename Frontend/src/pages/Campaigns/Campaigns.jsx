@@ -8,9 +8,14 @@ import Modal from "react-bootstrap/Modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import upiqr from "upiqr";
-const baseURL = import.meta.env.VITE_API_URL;
+import Sidebar from "../../components/NGO/sidebar/sidebar";
+import Navbar from "../../components/NGO/navbar/navbar";
+import "./campaign.css"
+
 
 export default function Campaigns() {
+  //All the functions, Modals, upi, etc. are shifted to Frontend/src/components/NGO/CampaignModal
+  const baseURL = import.meta.env.VITE_API_URL;
   const [curUser, setUser] = useState([]);
   const [myEvents, setEvents] = useState([]);
   const [eventId, setId] = useState("");
@@ -288,154 +293,16 @@ export default function Campaigns() {
     ));
     return cards;
   }
+
+  //Frontend work starts here
   return (
-    <>
-      <h1>Campaigns</h1>
-      <Button variant="primary" onClick={handleShowA}>
-        Add an Campaign
-      </Button>
-
-      <ul> {myEvents && getCampaigns()}</ul>
-      {/*modal for adding an event */}
-
-      <Modal show={showA} onHide={handleCloseA}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add an Event </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                name="name"
-                value={cred.name}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Target for campaign</Form.Label>
-              <Form.Control
-                type="Number"
-                name="target"
-                value={cred.target}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                as="textarea"
-                name="description"
-                rows={3}
-                value={cred.description}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleA}>
-            Add event
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      {/*modal for deleting  an event */}
-
-      <Modal
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        show={showD}
-        onHide={handleCloseD}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Delete event
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>Sure you want to delete it</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={handleCloseD}>No</Button>
-          <Button onClick={handleDelete}>Delete</Button>
-        </Modal.Footer>
-      </Modal>
-
-      {/*modal for editing and event */}
-
-      <Modal show={showE} onHide={handleCloseE}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add an Event </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                name="name"
-                value={cred.name}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Target for campaign</Form.Label>
-              <Form.Control
-                type="Number"
-                name="target"
-                value={cred.target}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                as="textarea"
-                name="description"
-                rows={3}
-                value={cred.description}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleEdit}>
-            Edit event
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      {/* Modal for taking donation amount*/}
-
-      <Modal
-        show={showDo}
-        onHide={handleCloseDo}
-        size="md"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Scan the Qr
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {qrImage && (
-            <img src={qrImage} alt="QR Code" style={{ width: "100%" }} />
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={handleCloseDo}>Close</Button>
-        </Modal.Footer>
-      </Modal>
-      <ToastContainer />
-    </>
+    <div className="Campaign_Home">
+      <Sidebar />
+      <div className="Campaign_Home_Container">
+        <Navbar />
+        <br></br>
+        CONTAINER
+      </div>
+    </div>
   );
 }

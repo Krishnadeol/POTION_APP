@@ -211,7 +211,7 @@ export default function Allevents() {
       try {
         console.log("Inside the first useEffect");
         if (!localStorage.getItem("crowd-app-ngo-data")) {
-          navigate("/");
+          navigate("/ngo_events");  //will change after frontend done
         } else {
           setUser(JSON.parse(localStorage.getItem("crowd-app-ngo-data")));
           console.log(curUser, "this is after setting the curuser");
