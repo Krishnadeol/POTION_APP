@@ -37,7 +37,6 @@ router.post(
     }
   }
 );
-
 router.post(
   "/Register",
   [
@@ -47,9 +46,9 @@ router.post(
     body("password", "Password must have at least 5 characters").isLength({
       min: 5,
     }),
-    body("category", "Enter a valid category").exists(),
   ],
   async (req, res) => {
+    console.log("here i am");
     const errors = validationResult(req);
     let success = false;
     if (!errors.isEmpty()) {
@@ -58,20 +57,25 @@ router.post(
     // checking for non unique email.
     try {
       let user = await User.findOne({ email: req.body.email });
-
+      console.log(" below email");
       if (user) {
         return res
           .status(400)
           .json({ success, message: "this user already exists" });
       }
+
       const myPass = req.body.password;
+
       // these are returning promises . Hence we should use await . here we encypting the password
       const salt = bcrypt.genSaltSync(saltRounds);
       const hash = bcrypt.hashSync(myPass, salt);
+
       user = await User.create({
         name: req.body.name,
         password: hash,
         email: req.body.email,
+        UPI: req.body.UPI,
+        payee: req.body.payee,
         category: req.body.category,
       });
 
@@ -84,7 +88,7 @@ router.post(
 
       success = true;
       const token = jwt.sign(data, JWT_SECRET);
-      res.json({ success, user: userWithoutPassword });
+      res.json({ sucess: success, user: userWithoutPassword });
     } catch (error) {
       console.error("something went wrong");
       res.status(500).json({ error: error.message });
@@ -135,7 +139,7 @@ router.post(
 
       success = true;
       const token = jwt.sign(data, JWT_SECRET);
-      res.json({ success, userWithoutPassword });
+      res.json({ success, user: userWithoutPassword });
     } catch (error) {
       console.error(error.message);
       res.status(500).json({ error: error.message });

@@ -9,7 +9,7 @@ import Modal from "react-bootstrap/Modal";
 import { FaUser, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import transition from "../../../transition";
-import "./Individual_Register.css"
+import "./Individual_Register.css";
 import video from "../../../../src/Zero Hunger Film _ Global Goals.mp4";
 const baseURL = import.meta.env.VITE_API_URL;
 function RegisterI() {
@@ -51,7 +51,7 @@ function RegisterI() {
         name: cred.name,
         email: cred.email,
         password: cred.password,
-        category: cred.category,
+        category: "Indivisual",
       });
       if (data.success) {
         localStorage.setItem("crowd-app-user-data", JSON.stringify(data.user));
@@ -84,7 +84,6 @@ function RegisterI() {
         }
       } catch (error) {
         toast.error(error.message, tobj);
-        console.log("loda");
       }
     }
   };
@@ -100,9 +99,6 @@ function RegisterI() {
       return false;
     } else if (password !== cpassword) {
       toast.error("Confired password does not match", tobj);
-      return false;
-    } else if (category === "") {
-      toast.error("Please select a cetegory type", tobj);
       return false;
     }
     return true;

@@ -50,6 +50,7 @@ function RegisterN() {
         name: cred.name,
         email: cred.email,
         password: cred.password,
+        category:"NGO"
       });
 
       if (data.success) {
@@ -99,9 +100,6 @@ function RegisterN() {
       return false;
     } else if (password !== cpassword) {
       toast.error("Confired password does not match", tobj);
-      return false;
-    } else if (category === "") {
-      toast.error("Please select a cetegory type", tobj);
       return false;
     }
     return true;
