@@ -8,14 +8,10 @@ import Modal from "react-bootstrap/Modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import upiqr from "upiqr";
-import Sidebar from "../../components/NGO/sidebar/sidebar";
-import Navbar from "../../components/NGO/navbar/navbar";
-import "./campaign.css"
+import { motion } from "framer-motion";
+const baseURL = import.meta.env.VITE_API_URL;
 
-
-export default function Campaigns() {
-  //All the functions, Modals, upi, etc. are shifted to Frontend/src/components/NGO/CampaignModal
-  const baseURL = import.meta.env.VITE_API_URL;
+export default function CampaignModal() {
   const [curUser, setUser] = useState([]);
   const [myEvents, setEvents] = useState([]);
   const [eventId, setId] = useState("");
@@ -145,7 +141,7 @@ export default function Campaigns() {
   // Modal to add event
   const handleAdd = async () => {
     try {
-      let { data } = await axios.post(`${import.meta.env.VITE_URL}`, {
+      let { data } = await axios.post(`${baseURL}/ngo/addcampaign`, {
         email: cred.email,
         name: cred.name,
         description: cred.description,
@@ -157,9 +153,9 @@ export default function Campaigns() {
         window.location.reload();
       } else {
         toast.error(" Server error", tobj);
-        alert("not sending the request");
       }
     } catch (error) {
+      toast.error(error.message, tobj);
       console.log({ error: error.message });
     }
   };
@@ -185,7 +181,7 @@ export default function Campaigns() {
   });
   const handleDonation = async (e) => {
     try {
-      let email = "d.12a@gmail.com";
+      let email = curUser.email;
       const { data } = await axios.get(`${baseURL}/ngo/upi?email=${email}`, {});
       if (data.success) {
         donCred.UPI = data.data.UPI;
@@ -218,7 +214,7 @@ export default function Campaigns() {
     const fetchData = async () => {
       try {
         if (!localStorage.getItem("crowd-app-ngo-data")) {
-          navigate("/");
+          navigate("/ngo_Campaigns"); //CHANGE IT back to "/" once Frontend done
         } else {
           console.log(localStorage.getItem("crowd-app-ngo-data"));
           setUser(JSON.parse(localStorage.getItem("crowd-app-ngo-data")));
@@ -236,7 +232,7 @@ export default function Campaigns() {
         const { data } = await axios.get(`${baseURL}/ngo/getcampaigns`);
 
         setEvents(data.data);
-        console.log("myEvents", myEvents);
+        console.log("Campaigns", myEvents);
         cred.email = curUser.email;
       } catch (error) {
         console.log("error", error);
@@ -254,7 +250,7 @@ export default function Campaigns() {
         <Card.Body>
           <Card.Title>{event.name}</Card.Title>
           <Card.Text>Email: {event.email}</Card.Text>
-          {localStorage.getItem("crowd-app-ngo-data") ? (
+          {localStorage.getItem("crowd-app-ind-data") ? (
             <Button
               variant="primary"
               onClick={() => {
@@ -265,7 +261,7 @@ export default function Campaigns() {
             </Button>
           ) : (
             <>
-              {curUser.email === event.email && (
+              {curUser.email == event.email && (
                 <Button
                   variant="primary"
                   onClick={() => {
@@ -294,15 +290,158 @@ export default function Campaigns() {
     return cards;
   }
 
-  //Frontend work starts here
   return (
-    <div className="Campaign_Home">
-      <Sidebar />
-      <div className="Campaign_Home_Container">
-        <Navbar />
-        <br></br>
-        CONTAINER
-      </div>
-    </div>
+    <>
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        className="but"
+        onClick={handleShowA}
+      >
+        Create Campaign
+      </motion.button>
+
+      <ul> {myEvents && getCampaigns()}</ul>
+      {/*modal for adding an event */}
+
+      <Modal show={showA} onHide={handleCloseA}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add an Event </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                value={cred.name}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Target for campaign</Form.Label>
+              <Form.Control
+                type="Number"
+                name="target"
+                value={cred.target}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                name="description"
+                rows={3}
+                value={cred.description}
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleA}>
+            Add event
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/*modal for deleting  an event */}
+
+      <Modal
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={showD}
+        onHide={handleCloseD}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Delete event
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Sure you want to delete it</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleCloseD}>No</Button>
+          <Button onClick={handleDelete}>Delete</Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/*modal for editing and event */}
+
+      <Modal show={showE} onHide={handleCloseE}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add an Event </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                value={cred.name}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Target for campaign</Form.Label>
+              <Form.Control
+                type="Number"
+                name="target"
+                value={cred.target}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                name="description"
+                rows={3}
+                value={cred.description}
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleEdit}>
+            Edit event
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* Modal for taking donation amount*/}
+
+      <Modal
+        show={showDo}
+        onHide={handleCloseDo}
+        size="md"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Scan the Qr
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {qrImage && (
+            <img src={qrImage} alt="QR Code" style={{ width: "100%" }} />
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleCloseDo}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+      <ToastContainer />
+    </>
   );
 }
